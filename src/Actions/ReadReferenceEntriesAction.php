@@ -7,11 +7,13 @@ namespace Capell\ExtensionCookbook\Actions;
 use Capell\ExtensionCookbook\Data\ReferenceEntryData;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use Illuminate\Support\Collection;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Lorisleiva\Actions\Concerns\AsFake;
+use Lorisleiva\Actions\Concerns\AsObject;
 
 final class ReadReferenceEntriesAction
 {
-    use AsAction;
+    use AsFake;
+    use AsObject;
 
     /** @return Collection<int, ReferenceEntryData> */
     public function handle(?int $siteId = null): Collection

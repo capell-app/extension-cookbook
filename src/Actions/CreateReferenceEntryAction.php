@@ -8,11 +8,13 @@ use Capell\Core\Models\Page;
 use Capell\ExtensionCookbook\Data\ReferenceEntryData;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use InvalidArgumentException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Lorisleiva\Actions\Concerns\AsFake;
+use Lorisleiva\Actions\Concerns\AsObject;
 
 final class CreateReferenceEntryAction
 {
-    use AsAction;
+    use AsFake;
+    use AsObject;
 
     public function handle(ReferenceEntryData $data): ReferenceEntry
     {

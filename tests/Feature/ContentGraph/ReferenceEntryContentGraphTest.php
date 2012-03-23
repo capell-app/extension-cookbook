@@ -86,7 +86,7 @@ it('rejects a related page from another site at the write boundary', function ()
     DB::table('sites')->insertOrIgnore([['id' => 504], ['id' => 505]]);
     DB::table('pages')->insertOrIgnore(['id' => 604, 'site_id' => 505]);
 
-    expect(fn (): ReferenceEntry => (new CreateReferenceEntryAction)->handle(new ReferenceEntryData(
+    expect(fn (): ReferenceEntry => CreateReferenceEntryAction::run(new ReferenceEntryData(
         title: 'Invalid cross site example',
         slug: 'invalid-cross-site-example',
         siteId: 504,

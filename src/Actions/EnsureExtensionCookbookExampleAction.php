@@ -7,10 +7,12 @@ namespace Capell\ExtensionCookbook\Actions;
 use Capell\Core\Models\Site;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use Illuminate\Support\Facades\Schema;
+use Lorisleiva\Actions\Concerns\AsFake;
 use Lorisleiva\Actions\Concerns\AsObject;
 
 final class EnsureExtensionCookbookExampleAction
 {
+    use AsFake;
     use AsObject;
 
     /**
