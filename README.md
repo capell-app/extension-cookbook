@@ -120,7 +120,6 @@ Screenshot contract: `docs/screenshots.json`.
 - Configuration files: [`config/extension-cookbook.php`](config/extension-cookbook.php).
 - [Troubleshooting](#troubleshooting)
 - [Screenshot contract](docs/screenshots.json)
-- [Marketplace assets](docs/assets/marketplace/)
-- Focused tests: `vendor/bin/pest tests --configuration=phpunit.xml`.
+- [Marketplace assets](docs/assets/marketplace/)- Focused tests: `vendor/bin/pest tests --configuration=phpunit.xml`.
 
 <!-- prettier-ignore-end -->

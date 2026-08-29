@@ -60,7 +60,7 @@ boundary. "Demonstrated (transitive)" means the package reaches the contract
 through another supported method. "Deliberately inactive" means this reference package does not claim
 the method as a shipped example.
 
-### [`PackageSurfaceRegistrar`](https://github.com/capell-app/core/blob/main/packages/core/src/Support/Packages/PackageSurfaceRegistrar.php#L40)
+### [`PackageSurfaceRegistrar`](https://github.com/capell-app/core/blob/main/src/Support/Packages/PackageSurfaceRegistrar.php#L40)
 
 | Method                                                                                                                            | Status                                             |
 | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -79,7 +79,7 @@ the method as a shipped example.
 | `settingsMetadata(SettingsGroupMetadata $metadata)`                                                                               | Demonstrated                                       |
 | `metricCollector(string $collectorClass)`                                                                                         | Demonstrated                                       |
 
-### [`AdminBridgeRegistrar`](https://github.com/capell-app/core/blob/main/packages/admin/src/Support/Bridges/AdminBridgeRegistrar.php#L50)
+### [`AdminBridgeRegistrar`](https://github.com/capell-app/admin/blob/main/src/Support/Bridges/AdminBridgeRegistrar.php#L50)
 
 | Method                                                                                                 | Status                |
 | ------------------------------------------------------------------------------------------------------ | --------------------- |
@@ -127,7 +127,7 @@ package. The Core provider is the canonical owner of the setting class, schema,
 and metadata through `PackageSurfaceRegistrar`; the Admin bridge registers only
 admin pages, resources, widgets, and extenders.
 
-### [`FrontendHookRegistrar`](https://github.com/capell-app/core/blob/main/packages/frontend/src/Support/Render/FrontendHookRegistrar.php#L22)
+### [`FrontendHookRegistrar`](https://github.com/capell-app/frontend/blob/main/src/Support/Render/FrontendHookRegistrar.php#L22)
 
 | Method                                                                                                                                                                                                                  | Status       |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -156,8 +156,8 @@ This package is a positive consumer of the released contracts that exist today.
 The current Core `PublicRenderDataContributor` seam is marked experimental and
 is not in the released dependency contract consumed by this package, so it
 remains an explicit programme gap rather than a manifest claim. See the [Core
-contract](https://github.com/capell-app/core/blob/main/packages/frontend/src/Contracts/PublicRenderDataContributor.php#L20-L36)
-and [registry](https://github.com/capell-app/core/blob/main/packages/frontend/src/Support/Render/PublicRenderDataContributorRegistry.php#L19-L64)
+contract](https://github.com/capell-app/frontend/blob/main/src/Contracts/PublicRenderDataContributor.php#L20-L36)
+and [registry](https://github.com/capell-app/frontend/blob/main/src/Support/Render/PublicRenderDataContributorRegistry.php#L19-L64)
 when evaluating that follow-up. The package also does not claim runtime
 receipts or receipt reconciliation (CAP-0467), relative ordering and collision
 policy (CAP-0468), or stable Admin zones (CAP-0471).
