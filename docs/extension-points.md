@@ -4,6 +4,10 @@ The [overview](overview.md) is the complete 27-type contribution map and the
 registrar inventory. This page gives the short implementation recipes used by
 the active examples.
 
+The runnable source is available in the public [Extension Cookbook repository](https://github.com/capell-app/extension-cookbook/tree/4.x). The links below point
+to the owning provider, bridge, data boundary, and tests so the prose can be
+checked against the implementation.
+
 ## Public frontend
 
 `FrontendServiceProvider` runs only when the package is installed and the
@@ -15,6 +19,9 @@ the public render hook.
 `ExtensionCookbookServiceProvider` is the gated runtime provider. It owns
 Core surface registration, the doctor command and health schedule in console
 contexts, and the content-graph extractor tag.
+
+See the [runtime provider](https://github.com/capell-app/extension-cookbook/blob/4.x/src/Providers/ExtensionCookbookServiceProvider.php#L30-L72)
+and [frontend provider](https://github.com/capell-app/extension-cookbook/blob/4.x/src/Providers/FrontendServiceProvider.php#L25-L91).
 
 The widget definition is keyed as `capell-app.extension-cookbook` and requires
 all four typed boundaries: `ExtensionCookbookWidget`, `ExtensionCookbookWidgetInputData`,
@@ -28,6 +35,10 @@ package view identifier. `FrontendHookRegistrar::contribute()` registers a
 stable owner and key at `BodyEnd`, targeted to this route. The hook renders a
 plain paragraph and has no package selector, model identity, authoring state,
 or editor URL.
+
+The corresponding [typed widget](https://github.com/capell-app/extension-cookbook/blob/4.x/src/Widget/ExtensionCookbookWidget.php)
+and [frontend safety tests](https://github.com/capell-app/extension-cookbook/blob/4.x/tests/Feature/Frontend/ExtensionCookbookFrontendTest.php)
+show the boundary end to end.
 
 The resource group uses typed `FrontendResourceData` values and local public
 resource paths. The package's normal asset publication configuration owns
@@ -51,6 +62,9 @@ non-entry, an entry without `site_id` or `related_page_id`, or a related Page
 from another site; otherwise it emits one weak, directed relation to the Core
 Page identity. It checks persisted Page site state without lazy-loading the
 `relatedPage` relationship.
+
+The [content-graph test](https://github.com/capell-app/extension-cookbook/blob/4.x/tests/Feature/ContentGraph/ReferenceEntryContentGraphTest.php)
+keeps the site-ownership guard executable.
 
 ## Deliberately inactive surfaces
 

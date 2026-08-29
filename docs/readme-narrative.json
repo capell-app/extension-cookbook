@@ -1,0 +1,32 @@
+{
+    "whatThisPluginAdds": {
+        "text": "Extension Cookbook is a free, runnable package of small examples for Capell's supported Core, Admin, Frontend, lifecycle, data, health, and content-graph contracts.",
+        "evidence": [
+            "capell.json",
+            "src/Providers/ExtensionCookbookServiceProvider.php",
+            "docs/extension-points.md"
+        ]
+    },
+    "surfaceOutcome": {
+        "text": "Package authors can install one maintained example, follow each contribution from manifest to provider, and copy the focused test that proves its behaviour.",
+        "evidence": [
+            "src/Providers/FrontendServiceProvider.php",
+            "src/Manifest/Core/ExtensionCookbookPageTypeContribution.php",
+            "tests/Unit/Manifest/ExtensionCookbookManifestTest.php"
+        ]
+    },
+    "whyItMatters": {
+        "developers": {
+            "text": "Each demonstrated seam has an owning class, a documented registration path, and a focused regression test; deliberately inactive seams are labelled instead of being implied.",
+            "evidence": [
+                "docs/extension-points.md",
+                "src/Support/Admin/ExtensionCookbookCoverageCatalogue.php",
+                "tests/Feature/Admin/ExtensionCookbookAdminSurfaceTest.php"
+            ]
+        },
+        "teams": {
+            "text": "The cookbook is MIT-licensed and free to install, so teams can evaluate extension patterns without adopting a commercial feature package or copying undocumented internals.",
+            "evidence": ["LICENSE", "composer.json", "capell.json"]
+        }
+    }
+}

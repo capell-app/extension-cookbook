@@ -7,6 +7,11 @@ manifest contribution, and a documented runtime registration. A row marked
 "manifest only" is deliberately inactive and is not presented as a working
 runtime surface.
 
+Browse the [public source repository](https://github.com/capell-app/extension-cookbook/tree/4.x),
+the [manifest](https://github.com/capell-app/extension-cookbook/blob/4.x/capell.json),
+and the [package test suite](https://github.com/capell-app/extension-cookbook/tree/4.x/tests)
+alongside this catalogue.
+
 ## Complete contribution map
 
 The table below covers every current `ExtensionContributionType` value (27 at
@@ -160,3 +165,10 @@ render-data contributors or fingerprints (CAP-0469), or stable Admin zones
 The extension is MIT-licensed and first-party. Authentic route and installed-host
 captures are described in `docs/screenshots.json`; no screenshot in this
 package is presented as release evidence until produced by the shared runner.
+
+## Troubleshooting
+
+If an example is not visible, check that the package is installed and enabled
+for the current site and that setup ran with a valid site context. Manifest-only
+rows are intentionally inactive. Use the focused package test named by the
+relevant table row before changing registration code.

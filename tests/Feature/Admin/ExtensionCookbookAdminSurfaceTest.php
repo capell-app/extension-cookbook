@@ -313,6 +313,15 @@ it('does not activate dangerous global replacement seams', function (): void {
         ->and($bridgeSource)->not->toContain('settingsSchema(');
 });
 
+it('fails closed when workflow attention runs before its table exists', function (): void {
+    Schema::dropIfExists('extension_cookbook_entries');
+    $user = Mockery::mock(Authenticatable::class);
+
+    Gate::define('View:ExtensionCookbook', static fn (Authenticatable $actor): bool => $actor === $user);
+
+    expect((new ExtensionCookbookWorkflowAttentionContribution)->attentionItems($user))->toBe([]);
+});
+
 it('keeps all declared admin contribution classes on the public API contract', function (): void {
     foreach ([
         ExtensionCookbookAdminPageContribution::class,
