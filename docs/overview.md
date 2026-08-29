@@ -160,8 +160,8 @@ This package is a positive consumer of the released contracts that exist today.
 The current Core `PublicRenderDataContributor` seam is marked experimental and
 is not in the released dependency contract consumed by this package, so it
 remains an explicit programme gap rather than a manifest claim. See the [Core
-contract](https://github.com/capell-app/frontend/blob/main/src/Contracts/PublicRenderDataContributor.php#L20-L36)
-and [registry](https://github.com/capell-app/frontend/blob/main/src/Support/Render/PublicRenderDataContributorRegistry.php#L19-L64)
+contract](https://github.com/capell-app/capell/blob/main/packages/frontend/src/Contracts/PublicRenderDataContributor.php#L20-L36)
+and [registry](https://github.com/capell-app/capell/blob/main/packages/frontend/src/Support/Render/PublicRenderDataContributorRegistry.php#L19-L64)
 when evaluating that follow-up. The package also does not claim runtime
 receipts or receipt reconciliation (CAP-0467), relative ordering and collision
 policy (CAP-0468), or stable Admin zones (CAP-0471).
