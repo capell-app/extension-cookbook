@@ -1,7 +1,3 @@
-# Capell Extension Cookbook
-
-<!-- prettier-ignore-start -->
-
 Capell Extension Cookbook is the MIT-licensed canonical runnable demo and reference
 repository for the documented public Capell extension contracts. It is intentionally
 small: each example has an owning class, a
@@ -178,9 +174,3 @@ If an example is not visible, check that the package is installed and enabled
 for the current site and that setup ran with a valid site context. Manifest-only
 rows are intentionally inactive. Use the focused package test named by the
 relevant table row before changing registration code.
-
----
-
-For developers: see the [README](../README.md).
-
-<!-- prettier-ignore-end -->

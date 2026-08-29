@@ -77,6 +77,7 @@ context. The package also
 avoids broad admin replacement seams and other registrar methods that would
 imply ownership of unrelated screens.
 
-The package does not introduce receipt, ordering, generic cached public
-render-data, or stable Admin-zone APIs. It consumes existing documented
-contracts only.
+The package does not introduce receipt, ordering, public render-data, or stable
+Admin-zone APIs. Core's public render-data contributor is currently
+experimental and absent from this package's released dependency contract; it is
+tracked as a follow-up rather than presented as a supported cookbook recipe.
