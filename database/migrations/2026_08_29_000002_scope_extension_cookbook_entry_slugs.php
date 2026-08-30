@@ -56,6 +56,12 @@ return new class extends Migration
         }
 
         if (Schema::hasIndex(self::TABLE, self::UNIQUE_INDEX)) {
+            if (! $this->hasIndexForColumn('site_id', self::UNIQUE_INDEX)) {
+                Schema::table(self::TABLE, function (Blueprint $table): void {
+                    $table->index('site_id', 'extension_cookbook_entries_site_id_index');
+                });
+            }
+
             Schema::table(self::TABLE, function (Blueprint $table): void {
                 $table->dropUnique(self::UNIQUE_INDEX);
             });
@@ -86,5 +92,20 @@ return new class extends Migration
         }
 
         return $indexes;
+    }
+
+    private function hasIndexForColumn(string $column, ?string $except = null): bool
+    {
+        foreach (Schema::getIndexes(self::TABLE) as $index) {
+            if ($except !== null && ($index['name'] ?? null) === $except) {
+                continue;
+            }
+
+            if (($index['columns'] ?? []) !== [] && ($index['columns'][0] ?? null) === $column) {
+                return true;
+            }
+        }
+
+        return false;
     }
 };
