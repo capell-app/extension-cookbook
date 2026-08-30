@@ -1,0 +1,269 @@
+{
+    "manifest-version": 3,
+    "name": "capell-app/extension-cookbook",
+    "slug": "extension-cookbook",
+    "displayName": "Capell Extension Cookbook",
+    "kind": "package",
+    "capellApiVersion": "^1.0",
+    "version": "1.0.0",
+    "description": "A free first-party developer reference for Capell's supported public extension contracts.",
+    "product": {
+        "group": "Capell Foundation",
+        "tier": "free",
+        "bundle": "foundation"
+    },
+    "namespace": "Capell\\ExtensionCookbook",
+    "surfaces": ["admin", "frontend", "shared"],
+    "dependencies": {
+        "requires": [
+            "capell-app/admin",
+            "capell-app/core",
+            "capell-app/frontend",
+            "capell-app/layout-builder"
+        ],
+        "supports": [],
+        "conflicts": []
+    },
+    "providers": {
+        "metadata": [],
+        "install": [],
+        "runtime": [
+            "Capell\\ExtensionCookbook\\Providers\\ExtensionCookbookServiceProvider"
+        ],
+        "admin": ["Capell\\ExtensionCookbook\\Providers\\AdminServiceProvider"],
+        "frontend": [
+            "Capell\\ExtensionCookbook\\Providers\\FrontendServiceProvider"
+        ]
+    },
+    "contributes": [
+        {
+            "type": "admin-page",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookAdminPageContribution",
+            "pageClass": "Capell\\ExtensionCookbook\\Filament\\Pages\\ExtensionCookbookPage"
+        },
+        {
+            "type": "admin-resource",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ReferenceEntryResourceContribution"
+        },
+        {
+            "type": "admin-action-extender",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookAdminActionExtenderContribution"
+        },
+        {
+            "type": "section",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookSectionContribution"
+        },
+        {
+            "type": "page-type",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookPageTypeContribution",
+            "key": "extension-cookbook.entry"
+        },
+        {
+            "type": "dashboard-widget",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookDashboardWidgetContribution"
+        },
+        {
+            "type": "overview-stat",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookOverviewStatContribution"
+        },
+        {
+            "type": "schema-extender",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookSchemaExtenderContribution"
+        },
+        {
+            "type": "configurator",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookConfiguratorContribution"
+        },
+        {
+            "type": "model",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ReferenceEntryModelContribution",
+            "modelClasses": [
+                "Capell\\ExtensionCookbook\\Models\\ReferenceEntry"
+            ]
+        },
+        {
+            "type": "permission",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookPermissionsContribution"
+        },
+        {
+            "type": "route",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookRoutesContribution",
+            "namePrefix": "capell-extension-cookbook."
+        },
+        {
+            "type": "setting",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookSettingContribution",
+            "settingsClass": "Capell\\ExtensionCookbook\\Settings\\ExtensionCookbookSettings",
+            "settingsGroup": "extension_cookbook",
+            "settingsSchema": "Capell\\ExtensionCookbook\\Filament\\Settings\\ExtensionCookbookSettingsSchema"
+        },
+        {
+            "type": "page-variation",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookPageVariationContribution"
+        },
+        {
+            "type": "frontend-component",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookFrontendComponentContribution"
+        },
+        {
+            "type": "content-widget",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookContentWidgetContribution",
+            "key": "capell-app.extension-cookbook"
+        },
+        {
+            "type": "render-hook",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookRenderHookContribution"
+        },
+        {
+            "type": "asset",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookAssetContribution"
+        },
+        {
+            "type": "migration",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookMigrationContribution",
+            "tables": ["extension_cookbook_entries"],
+            "migrationFiles": [
+                "2026_08_29_000001_create_extension_cookbook_entries",
+                "2026_08_29_000002_scope_extension_cookbook_entry_slugs"
+            ]
+        },
+        {
+            "type": "scheduled-job",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookScheduledJobContribution",
+            "schedule": "daily"
+        },
+        {
+            "type": "console-command",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookConsoleCommandsContribution"
+        },
+        {
+            "type": "agent-capability",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookAgentCapabilityContribution"
+        },
+        {
+            "type": "content-graph",
+            "class": "Capell\\ExtensionCookbook\\ContentGraph\\ReferenceEntryContentGraphExtractor"
+        },
+        {
+            "type": "health-check",
+            "class": "Capell\\ExtensionCookbook\\Health\\ExtensionCookbookHealthCheck"
+        },
+        {
+            "type": "workflow-attention",
+            "class": "Capell\\ExtensionCookbook\\Admin\\Workflow\\ExtensionCookbookWorkflowAttentionContribution"
+        },
+        {
+            "type": "outbound-event",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookOutboundEventContribution"
+        },
+        {
+            "type": "blueprint-subject",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookBlueprintSubjectContribution"
+        }
+    ],
+    "contributionTraceability": { "deferredContributions": [] },
+    "database": {
+        "migrations": true,
+        "settings": true,
+        "requiredTables": ["extension_cookbook_entries"]
+    },
+    "commands": {
+        "install": null,
+        "setup": null,
+        "setupParams": ["sites"],
+        "afterInstall": null,
+        "afterInstallParams": ["sites"],
+        "uninstall": null,
+        "doctor": "capell:extension-cookbook-doctor"
+    },
+    "actions": {
+        "install": "Capell\\ExtensionCookbook\\Actions\\InstallExtensionCookbookPackageAction",
+        "setup": "Capell\\ExtensionCookbook\\Actions\\SetupExtensionCookbookPackageAction",
+        "afterInstall": "Capell\\ExtensionCookbook\\Actions\\AfterInstallExtensionCookbookPackageAction",
+        "uninstall": "Capell\\ExtensionCookbook\\Actions\\UninstallExtensionCookbookPackageAction"
+    },
+    "settings": [
+        "Capell\\ExtensionCookbook\\Settings\\ExtensionCookbookSettings"
+    ],
+    "permissions": ["View:ExtensionCookbook", "Manage:ExtensionCookbook"],
+    "capabilities": [
+        "extension-cookbook",
+        "developer-reference",
+        "public-extension-contracts"
+    ],
+    "security": {
+        "riskTier": "low",
+        "publicSurface": {
+            "routeNames": ["capell-extension-cookbook.index"],
+            "auth": "none",
+            "csrfExemptRoutes": [],
+            "signedRoutes": [],
+            "tokenizedRoutes": [],
+            "webhookRoutes": [],
+            "throttledRoutes": []
+        },
+        "sensitiveData": {
+            "encryptedFields": [],
+            "hashedTokenFields": [],
+            "redactedOutputClasses": [],
+            "plaintextJustifications": []
+        },
+        "publicOutput": {
+            "cacheSafe": true,
+            "forbidAuthoringSurface": true,
+            "forbidSecrets": true,
+            "forbidPublicBladeQueries": true
+        },
+        "externalHttpClients": {
+            "requiresTimeouts": false,
+            "requiresSecretRedaction": false,
+            "clients": []
+        },
+        "adminSurface": {
+            "authorization": "permissions",
+            "permissions": [
+                "View:ExtensionCookbook",
+                "Manage:ExtensionCookbook"
+            ]
+        }
+    },
+    "performance": {
+        "frontendRenderBudgetMs": 10,
+        "adminQueryBudget": 20,
+        "cacheTags": ["extension-cookbook"],
+        "cacheSafety": {
+            "cacheable": false,
+            "variesBy": [],
+            "sensitiveOutput": false,
+            "invalidationSources": [],
+            "queueInvalidation": false
+        }
+    },
+    "healthChecks": [
+        {
+            "key": "extension-cookbook.package-health",
+            "label": "Capell Extension Cookbook package surfaces are discoverable.",
+            "class": "Capell\\ExtensionCookbook\\Health\\ExtensionCookbookHealthCheck",
+            "severity": "warning",
+            "surface": "shared"
+        }
+    ],
+    "commercial": {
+        "proposedLicense": "free",
+        "requestedCertification": "first-party",
+        "supportPolicy": "capell-first-party",
+        "privateDocsRequested": false
+    },
+    "marketplace": {
+        "summary": "A free developer reference for Capell's supported public extension contracts.",
+        "categories": ["admin", "console", "foundation", "frontend"],
+        "screenshots": [
+            {
+                "path": "docs/assets/marketplace/extension-card.svg",
+                "alt": "Capell Extension Cookbook developer reference package card",
+                "caption": "Capell Extension Cookbook package reference"
+            }
+        ],
+        "sales_pitch": "Capell Extension Cookbook is a free developer reference for the supported public extension contracts in Capell. It demonstrates package-owned models, typed Actions and data, lifecycle registration, settings, outbound events, blueprint subjects, metrics, and scoped page integration. The example stays deliberately small and safe so developers can trace registration before building a production package. Use it as a reference for public package surfaces, not as a replacement for your domain or private internals. Review the documentation and tests before adapting it."
+    }
+}

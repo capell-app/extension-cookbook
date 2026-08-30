@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Capell Extension Cookbook Marketplace card</title><desc id="desc">An MIT-licensed canonical runnable reference for safe Capell extension points.</desc>
+<rect width="1280" height="720" fill="#f5f7fb"/><rect width="1280" height="96" fill="#172033"/>
+<text x="64" y="61" font-family="Arial,sans-serif" font-size="21" font-weight="700" letter-spacing="2" fill="#fff">CAPELL · MIT-LICENSED · REFERENCE</text>
+<text x="64" y="238" font-family="Arial,sans-serif" font-size="64" font-weight="800" fill="#172033">Capell Extension Cookbook</text>
+<text x="64" y="302" font-family="Arial,sans-serif" font-size="28" fill="#40506b">A working reference for safe extension points.</text>
+<rect x="64" y="382" width="510" height="138" rx="18" fill="#fff" stroke="#cbd5e1" stroke-width="3"/>
+<text x="96" y="428" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#4f46e5">DEVELOPER OUTCOME</text>
+<text x="96" y="468" font-family="Arial,sans-serif" font-size="21" fill="#172033">Trace routes, widgets, hooks, assets,</text><text x="96" y="500" font-family="Arial,sans-serif" font-size="21" fill="#172033">health, and graph edges end to end.</text>
+<g transform="translate(748 186)" fill="none" stroke="#4f46e5" stroke-width="8"><rect x="0" y="0" width="108" height="108" rx="20" fill="#fff"/><rect x="142" y="0" width="108" height="108" rx="20" fill="#fff"/><rect x="284" y="0" width="108" height="108" rx="20" fill="#fff"/><path d="M108 54h34M250 54h34M54 108v74M196 108v74M338 108v74"/></g>
+<text x="776" y="416" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#172033">PUBLIC CONTRACTS</text><text x="776" y="450" font-family="Arial,sans-serif" font-size="18" fill="#40506b">Hydrated output · cache-safe hooks</text><text x="776" y="480" font-family="Arial,sans-serif" font-size="18" fill="#40506b">Typed widgets · truthful health checks</text>
+<text x="64" y="660" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1.5" fill="#40506b">INSTALLABLE REFERENCE · NO CUSTOMER CONTENT WRITES</text>
+</svg>
