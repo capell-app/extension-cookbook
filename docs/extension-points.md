@@ -1,6 +1,6 @@
 # Extension points reference
 
-The [overview](overview.md) is the complete 27-type contribution map and the
+The [overview](overview.md) is the complete 28-type contribution map and the
 registrar inventory. This page gives the short implementation recipes used by
 the active examples.
 
@@ -18,7 +18,7 @@ the public render hook.
 
 `ExtensionCookbookServiceProvider` is the gated runtime provider. It owns
 Core surface registration, the doctor command and health schedule in console
-contexts, and the content-graph extractor tag.
+contexts, and explicit content-graph extractor registration.
 
 See the [runtime provider](https://github.com/capell-app/extension-cookbook/blob/4.x/src/Providers/ExtensionCookbookServiceProvider.php#L30-L72)
 and [frontend provider](https://github.com/capell-app/extension-cookbook/blob/4.x/src/Providers/FrontendServiceProvider.php#L25-L91).

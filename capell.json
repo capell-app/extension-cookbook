@@ -39,15 +39,22 @@
         {
             "type": "admin-page",
             "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookAdminPageContribution",
-            "pageClass": "Capell\\ExtensionCookbook\\Filament\\Pages\\ExtensionCookbookPage"
+            "pageClass": "Capell\\ExtensionCookbook\\Filament\\Pages\\ExtensionCookbookPage",
+            "keys": [
+                "Capell\\ExtensionCookbook\\Filament\\Pages\\ExtensionCookbookPage",
+                "extension-page:capell-app/extension-cookbook:Capell\\ExtensionCookbook\\Filament\\Pages\\ExtensionCookbookPage",
+                "bridge:capell-app/extension-cookbook:Capell\\ExtensionCookbook\\Bridges\\ExtensionCookbookAdminBridge"
+            ]
         },
         {
             "type": "admin-resource",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ReferenceEntryResourceContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ReferenceEntryResourceContribution",
+            "key": "resource:System:default"
         },
         {
             "type": "admin-action-extender",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookAdminActionExtenderContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookAdminActionExtenderContribution",
+            "key": "resource-header-action-extender:Capell\\ExtensionCookbook\\Filament\\Extenders\\ExtensionCookbookAdminActionExtender"
         },
         {
             "type": "section",
@@ -60,25 +67,39 @@
         },
         {
             "type": "dashboard-widget",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookDashboardWidgetContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookDashboardWidgetContribution",
+            "keys": [
+                "dashboard-widget:Capell\\ExtensionCookbook\\Filament\\Widgets\\ExtensionCookbookDashboardWidget",
+                "extensions-dashboard-widget:Capell\\ExtensionCookbook\\Filament\\Widgets\\ExtensionCookbookDashboardWidget"
+            ]
         },
         {
-            "type": "overview-stat",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookOverviewStatContribution"
+            "type": "dashboard-widget",
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookOverviewStatContribution",
+            "key": "dashboard-widget:Capell\\ExtensionCookbook\\Filament\\Widgets\\ExtensionCookbookOverviewStat"
         },
         {
             "type": "schema-extender",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookSchemaExtenderContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookSchemaExtenderContribution",
+            "keys": [
+                "schema-extender:capell.page_schema.extenders:Capell\\ExtensionCookbook\\Filament\\Extenders\\ExtensionCookbookPageSchemaExtender",
+                "schema_extender:capell.page_schema.extenders:Capell\\ExtensionCookbook\\Filament\\Extenders\\ExtensionCookbookPageSchemaExtender"
+            ]
         },
         {
             "type": "configurator",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookConfiguratorContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ExtensionCookbookConfiguratorContribution",
+            "key": "configurator:blueprint:extension-cookbook"
         },
         {
             "type": "model",
             "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ReferenceEntryModelContribution",
             "modelClasses": [
                 "Capell\\ExtensionCookbook\\Models\\ReferenceEntry"
+            ],
+            "keys": [
+                "model:Capell\\ExtensionCookbook\\Models\\ReferenceEntry",
+                "model-interceptor:Capell\\Core\\Models\\Page:Capell\\ExtensionCookbook\\Support\\Core\\ReferenceEntryPageInterceptor:extension-cookbook.entry"
             ]
         },
         {
@@ -95,7 +116,11 @@
             "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookSettingContribution",
             "settingsClass": "Capell\\ExtensionCookbook\\Settings\\ExtensionCookbookSettings",
             "settingsGroup": "extension_cookbook",
-            "settingsSchema": "Capell\\ExtensionCookbook\\Filament\\Settings\\ExtensionCookbookSettingsSchema"
+            "settingsSchema": "Capell\\ExtensionCookbook\\Filament\\Settings\\ExtensionCookbookSettingsSchema",
+            "keys": [
+                "settings-class:extension_cookbook",
+                "settings-metadata:extension_cookbook"
+            ]
         },
         {
             "type": "page-variation",
@@ -112,11 +137,13 @@
         },
         {
             "type": "render-hook",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookRenderHookContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookRenderHookContribution",
+            "key": "extension-cookbook.route-note"
         },
         {
             "type": "asset",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookAssetContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookAssetContribution",
+            "key": "resource-group:capell-app.extension-cookbook"
         },
         {
             "type": "migration",
@@ -154,11 +181,13 @@
         },
         {
             "type": "outbound-event",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookOutboundEventContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookOutboundEventContribution",
+            "key": "extension-cookbook.entry-published"
         },
         {
             "type": "blueprint-subject",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookBlueprintSubjectContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookBlueprintSubjectContribution",
+            "key": "extension-cookbook.entry"
         }
     ],
     "contributionTraceability": { "deferredContributions": [] },
@@ -186,11 +215,7 @@
         "Capell\\ExtensionCookbook\\Settings\\ExtensionCookbookSettings"
     ],
     "permissions": ["View:ExtensionCookbook", "Manage:ExtensionCookbook"],
-    "capabilities": [
-        "extension-cookbook",
-        "developer-reference",
-        "public-extension-contracts"
-    ],
+    "capabilities": ["extension-api", "admin-shell", "frontend-surface"],
     "security": {
         "riskTier": "low",
         "publicSurface": {

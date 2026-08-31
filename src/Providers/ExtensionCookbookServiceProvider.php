@@ -20,6 +20,7 @@ use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use Capell\ExtensionCookbook\Settings\ExtensionCookbookSettings;
 use Capell\ExtensionCookbook\Support\Core\ReferenceEntryPageInterceptor;
 use Illuminate\Console\Scheduling\Schedule;
+use Override;
 use Spatie\LaravelPackageTools\Package;
 
 final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvider
@@ -42,6 +43,7 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
             ]);
     }
 
+    #[Override]
     protected function bootInstalledPackage(): self
     {
         $surface = $this->surface();
@@ -64,7 +66,7 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
         }
 
         if ($this->app->bound(ContentGraphRegistry::class)) {
-            $this->app->tag(ReferenceEntryContentGraphExtractor::class, ContentGraphRegistry::TAG);
+            $this->app->make(ContentGraphRegistry::class)->register(ReferenceEntryContentGraphExtractor::class);
         }
 
         return $this;
