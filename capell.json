@@ -5,7 +5,7 @@
     "displayName": "Capell Extension Cookbook",
     "kind": "package",
     "capellApiVersion": "^1.0",
-    "version": "1.0.0",
+    "version": "1.x-dev",
     "description": "A free first-party developer reference for Capell's supported public extension contracts.",
     "product": {
         "group": "Capell Foundation",
