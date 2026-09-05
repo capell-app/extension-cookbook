@@ -6,7 +6,9 @@ namespace Capell\ExtensionCookbook\Filament\Resources\ReferenceEntries;
 
 use BackedEnum;
 use Capell\Admin\Support\SiteScope;
+use Capell\ExtensionCookbook\Filament\Resources\ReferenceEntries\Pages\ListReferenceEntries;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
+use Filament\Panel;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
@@ -62,6 +64,12 @@ final class ReferenceEntryResource extends Resource
     }
 
     #[Override]
+    public static function getSlug(?Panel $panel = null): string
+    {
+        return 'extension-cookbook/reference-entries';
+    }
+
+    #[Override]
     public static function canAccess(): bool
     {
         $user = auth()->user();
@@ -92,7 +100,7 @@ final class ReferenceEntryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListReferenceEntries::route('/'),
+            'index' => ListReferenceEntries::route('/'),
         ];
     }
 }
