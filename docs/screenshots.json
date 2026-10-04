@@ -19,7 +19,7 @@
             "colorSchemes": ["light"],
             "screenshotPath": "packages/extension-cookbook/docs/screenshots/extension-cookbook-admin-catalogue.png",
             "useCase": "A package developer verifies the canonical extension cookbook appears in the installed extension catalogue with its documented public identity.",
-            "notes": "Baseline contract only; CAP-0470 promotes this entry to required when authentic installed-App runner evidence exists. Do not fabricate a screenshot."
+            "notes": "Baseline contract only; this entry becomes required when authentic installed-App runner evidence exists. Do not fabricate a screenshot."
         },
         {
             "id": "extension-cookbook-widget",
@@ -33,7 +33,7 @@
             "colorSchemes": ["light"],
             "screenshotPath": "packages/extension-cookbook/docs/screenshots/extension-cookbook-widget.png",
             "useCase": "A package developer verifies the canonical reference widget is available through the documented Layout Builder content-widget contract.",
-            "notes": "Baseline contract only; CAP-0470 promotes this entry to required when authentic installed-App runner evidence exists. Requires seeded content; do not fabricate a screenshot."
+            "notes": "Baseline contract only; this entry becomes required when authentic installed-App runner evidence exists. Requires seeded content; do not fabricate a screenshot."
         },
         {
             "id": "extension-cookbook-public",
@@ -48,7 +48,7 @@
             "colorSchemes": ["light", "dark"],
             "screenshotPath": "packages/extension-cookbook/docs/screenshots/extension-cookbook-public.png",
             "useCase": "A package developer verifies the anonymous public route renders the canonical reference content without authoring or package internals.",
-            "notes": "Baseline contract only; CAP-0470 promotes this entry to required when authentic installed-App runner evidence exists. Authentic route-backed capture must be anonymous-safe; do not fabricate a screenshot."
+            "notes": "Baseline contract only; this entry becomes required when authentic installed-App runner evidence exists. Authentic route-backed capture must be anonymous-safe; do not fabricate a screenshot."
         }
     ],
     "notes": "Capture targets are contracts for the main review. No workflow screenshots are fabricated in this package."

@@ -284,7 +284,7 @@
         "categories": ["admin", "console", "foundation", "frontend"],
         "screenshots": [
             {
-                "path": "docs/assets/marketplace/extension-card.svg",
+                "path": "docs/assets/marketplace/extension-card.jpg",
                 "alt": "Capell Extension Cookbook developer reference package card",
                 "caption": "Capell Extension Cookbook package reference"
             }

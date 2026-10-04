@@ -9,8 +9,8 @@ tested example of a public extension contract.
   Admin, Frontend, lifecycle, data, health, and content-graph integrations.
 - [Screenshot contract](screenshots.json) — route-backed capture targets and
   provenance metadata.
-- [Package README](../README.md) — install, test, and code-map instructions.
+- [Package README](../README.md) — installation and code-map instructions.
 
 The cookbook intentionally labels unsupported or manifest-only seams as
 inactive. It is a runnable example package, not a substitute for the Core
-conformance work tracked by CAP-0470 and CAP-0471.
+conformance testing for provider isolation and Admin zones.

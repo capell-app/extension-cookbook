@@ -156,7 +156,7 @@ cross-site Page links rather than treating the package's records as global.
 
 Provider bucket declarations express the intended metadata, install, runtime,
 admin, and frontend boundaries, but this package does not claim request-context
-isolation proof for those buckets. That remains a CAP-0467/CAP-0470 follow-up.
+isolation proof for those buckets. Request-context isolation remains unverified.
 
 This package is a positive consumer of the released contracts that exist today.
 The current Core `PublicRenderDataContributor` seam is marked experimental and
@@ -165,8 +165,8 @@ remains an explicit programme gap rather than a manifest claim. See the [Core
 contract](https://github.com/capell-app/capell/blob/main/packages/frontend/src/Contracts/PublicRenderDataContributor.php#L20-L36)
 and [registry](https://github.com/capell-app/capell/blob/main/packages/frontend/src/Support/Render/PublicRenderDataContributorRegistry.php#L19-L64)
 when evaluating that follow-up. The package also does not claim runtime
-receipts or receipt reconciliation (CAP-0467), relative ordering and collision
-policy (CAP-0468), or stable Admin zones (CAP-0471).
+receipts or receipt reconciliation, relative ordering and collision
+policy, or stable Admin zones.
 
 ## Marketplace and screenshots
 

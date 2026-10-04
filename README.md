@@ -10,8 +10,6 @@ Extension Cookbook is a free, runnable package of small examples for Capell's re
 
 Package authors can install one maintained example, follow each contribution from manifest to provider, and copy the focused test that proves its behaviour.
 
-Evidence: [`capell.json`](capell.json), [`src/Providers/ExtensionCookbookServiceProvider.php`](src/Providers/ExtensionCookbookServiceProvider.php), [`docs/extension-points.md`](docs/extension-points.md), [`src/Providers/FrontendServiceProvider.php`](src/Providers/FrontendServiceProvider.php), [`src/Manifest/Core/ExtensionCookbookPageTypeContribution.php`](src/Manifest/Core/ExtensionCookbookPageTypeContribution.php), [`tests/Unit/Manifest/ExtensionCookbookManifestTest.php`](tests/Unit/Manifest/ExtensionCookbookManifestTest.php).
-
 Status details:
 
 - Status: Available
@@ -27,13 +25,11 @@ Status details:
 
 **For teams:** The cookbook is MIT-licensed and free to install, so teams can evaluate extension patterns without adopting a commercial feature package or copying undocumented internals.
 
-Evidence: [`docs/extension-points.md`](docs/extension-points.md), [`src/Support/Admin/ExtensionCookbookCoverageCatalogue.php`](src/Support/Admin/ExtensionCookbookCoverageCatalogue.php), [`tests/Feature/Admin/ExtensionCookbookAdminSurfaceTest.php`](tests/Feature/Admin/ExtensionCookbookAdminSurfaceTest.php), [`LICENSE`](LICENSE), [`composer.json`](composer.json), [`capell.json`](capell.json).
-
 ## Screens And Workflow
 
 Screenshot contract: `docs/screenshots.json`.
 
-![Capell Extension Cookbook developer reference package card](docs/assets/marketplace/extension-card.svg)
+![Capell Extension Cookbook developer reference package card](docs/assets/marketplace/extension-card.jpg)
 
 - Capell Extension Cookbook in the admin extension catalogue (admin, supplementary evidence).
 - Extension Cookbook widget in Layout Builder (admin, supplementary evidence).
@@ -233,6 +229,7 @@ Screenshot contract: `docs/screenshots.json`.
 
 - [Package docs](docs/README.md)
 - [Overview](docs/overview.md)
+- [Worked extension examples](docs/extension-contracts.md)
 - Configuration files: [`config/extension-cookbook.php`](config/extension-cookbook.php).
 - [Troubleshooting](#troubleshooting)
 - [Screenshot contract](docs/screenshots.json)
@@ -241,6 +238,5 @@ Screenshot contract: `docs/screenshots.json`.
 - [Capell documentation design system](../../docs/DESIGN_SYSTEM.md)
 - [Capell and package ERD notes](../../docs/erd/capell-and-package-erds.md)
 - Related packages: [Layout Builder](../layout-builder/README.md).
-- Focused tests: `vendor/bin/pest packages/extension-cookbook/tests --configuration=phpunit.xml`.
 
 <!-- prettier-ignore-end -->
