@@ -29,6 +29,9 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
 
     public static string $packageName = 'capell-app/extension-cookbook';
 
+    private bool $installedRuntimeBooted = false;
+
+    #[Override]
     public function configurePackage(Package $package): void
     {
         $package
@@ -46,6 +49,10 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
     #[Override]
     protected function bootInstalledPackage(): self
     {
+        if ($this->installedRuntimeBooted) {
+            return $this;
+        }
+
         $surface = $this->surface();
         $surface->models([ReferenceEntry::class])
             ->blueprintSubject(new BlueprintSubjectDescriptorData('extension-cookbook.entry', 'Capell Extension Cookbook entry', ReferenceEntry::class, self::$packageName))
@@ -68,6 +75,8 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
         if ($this->app->bound(ContentGraphRegistry::class)) {
             $this->app->make(ContentGraphRegistry::class)->register(ReferenceEntryContentGraphExtractor::class);
         }
+
+        $this->installedRuntimeBooted = true;
 
         return $this;
     }

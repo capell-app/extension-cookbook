@@ -22,12 +22,21 @@ use Capell\LayoutBuilder\Data\WidgetExtensions\WidgetExtensionDefinitionData;
 use Capell\LayoutBuilder\Support\WidgetExtensions\WidgetExtensionRegistrar;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Override;
 
 final class FrontendServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    private bool $installedRuntimeBooted = false;
+
+    #[Override]
+    public function register(): void
     {
-        if (! CapellCore::isPackageInstalled(ExtensionCookbookServiceProvider::$packageName)) {
+        $this->booted($this->bootInstalledRuntime(...));
+    }
+
+    private function bootInstalledRuntime(): void
+    {
+        if ($this->installedRuntimeBooted || ! CapellCore::isPackageInstalled(ExtensionCookbookServiceProvider::$packageName)) {
             return;
         }
 
@@ -36,6 +45,9 @@ final class FrontendServiceProvider extends ServiceProvider
         $this->loadViewsFrom($base . '/resources/views', 'capell-extension-cookbook');
         $this->loadTranslationsFrom($base . '/resources/lang', 'capell-extension-cookbook');
         Blade::anonymousComponentNamespace('Capell\\ExtensionCookbook\\View\\Components', 'extension-cookbook');
+
+        // Frontend discovery has already finished during an in-process installation.
+        Blade::component('capell-extension-cookbook::widget.extension-cookbook', 'extension-cookbook.widget');
 
         $this->app->scoped(ExtensionCookbookFrontendComponentContributor::class);
         $this->app->tag(ExtensionCookbookFrontendComponentContributor::class, FrontendComponentContributor::TAG);
@@ -87,5 +99,6 @@ final class FrontendServiceProvider extends ServiceProvider
                 cacheSafe: true,
             );
         }
+        $this->installedRuntimeBooted = true;
     }
 }
