@@ -8,7 +8,7 @@
         "php": "^8.4",
         "capell-app/admin": "^1.0",
         "capell-app/core": "^1.0.33",
-        "capell-app/frontend": "^1.0.10",
+        "capell-app/frontend": "^1.0.11",
         "capell-app/layout-builder": "^1.0",
         "filament/forms": "^5.7.6",
         "filament/filament": "^5.7.6",
