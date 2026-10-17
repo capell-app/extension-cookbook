@@ -10,12 +10,15 @@ use Capell\Core\Support\Process\SymfonyProcessFactory;
 use Capell\ExtensionCookbook\Providers\AdminServiceProvider;
 use Capell\ExtensionCookbook\Providers\ExtensionCookbookServiceProvider;
 use Capell\ExtensionCookbook\Providers\FrontendServiceProvider;
+use Capell\Tests\Support\Concerns\IsolatesTestbenchPaths;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Spatie\LaravelSettings\LaravelSettingsServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
+    use IsolatesTestbenchPaths;
+
     /**
      * Testbench bypasses the host manifest loader, so package tests install
      * each provider explicitly. Runtime-role filtering is covered separately

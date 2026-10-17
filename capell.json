@@ -49,7 +49,10 @@
         {
             "type": "admin-resource",
             "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ReferenceEntryResourceContribution",
-            "key": "resource:System:default"
+            "keys": [
+                "resource:System:default",
+                "resource:ReferenceEntry:default"
+            ]
         },
         {
             "type": "admin-action-extender",
@@ -217,10 +220,10 @@
     "permissions": ["View:ExtensionCookbook", "Manage:ExtensionCookbook"],
     "capabilities": ["extension-api", "admin-shell", "frontend-surface"],
     "security": {
-        "riskTier": "low",
+        "riskTier": "standard",
         "publicSurface": {
             "routeNames": ["capell-extension-cookbook.index"],
-            "auth": "none",
+            "auth": "public",
             "csrfExemptRoutes": [],
             "signedRoutes": [],
             "tokenizedRoutes": [],

@@ -15,8 +15,9 @@ it('does nothing when the settings repository table is absent', function (): voi
 
     $migration = require dirname(__DIR__, 3) . '/database/settings/2026_08_29_000001_add_extension_cookbook_settings.php';
 
-    expect(fn (): mixed => $migration->up())->not->toThrow(Throwable::class)
-        ->and(Schema::hasTable('settings'))->toBeFalse();
+    $migration->up();
+
+    expect(Schema::hasTable('settings'))->toBeFalse();
 });
 
 it('adds its default setting once when the repository table exists', function (): void {

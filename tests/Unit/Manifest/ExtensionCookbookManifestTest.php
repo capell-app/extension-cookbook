@@ -44,14 +44,12 @@ it('declares every extension cookbook contribution on the documented Core contra
     expect($screenshots['generatedFor'] ?? null)->toBe('shared-capell-screenshot-runner')
         ->and($screenshots['provenancePolicy'] ?? null)->toBe('runner-only-v1');
 
-    expect(function () use ($manifest, $composer): void {
-        (new ManifestValidator)->validate(
-            $manifest,
-            $composer,
-            'capell-app/extension-cookbook',
-            'packages/extension-cookbook/capell.json',
-        );
-    })->not->toThrow(Throwable::class);
+    (new ManifestValidator)->validate(
+        $manifest,
+        $composer,
+        'capell-app/extension-cookbook',
+        'packages/extension-cookbook/capell.json',
+    );
 });
 
 it('keeps provider buckets aligned with the runtime-role contract', function (): void {

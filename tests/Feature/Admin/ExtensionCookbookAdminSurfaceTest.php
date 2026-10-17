@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
+use Capell\Admin\Contracts\Extensions\ExtensionRemovalCoordinator;
+use Capell\Admin\Contracts\Themes\PendingThemeInstallProvider;
 use Capell\Admin\Data\Bridges\AdminBridgeContextData;
 use Capell\Admin\Enums\DashboardEnum;
 use Capell\Admin\Facades\CapellAdmin;
 use Capell\Admin\Support\Bridges\AdminBridgeRegistrar;
+use Capell\Admin\Support\Extensions\InRequestExtensionRemovalCoordinator;
 use Capell\Core\Enums\ExtensionContributionType;
+use Capell\Core\Support\Settings\SettingsSchemaRegistry;
 use Capell\ExtensionCookbook\Admin\Workflow\ExtensionCookbookWorkflowAttentionContribution;
 use Capell\ExtensionCookbook\Bridges\ExtensionCookbookAdminBridge;
 use Capell\ExtensionCookbook\Filament\Configurators\ExtensionCookbookConfigurator;
@@ -28,13 +32,16 @@ use Capell\ExtensionCookbook\Manifest\Admin\ReferenceEntryResourceContribution;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use Capell\ExtensionCookbook\Policies\ReferenceEntryPolicy;
 use Capell\ExtensionCookbook\Support\Admin\ExtensionCookbookCoverageCatalogue;
-use Filament\Widgets\StatsOverviewWidget\Stat;
+use Filament\Support\SupportServiceProvider;
+use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
+use Livewire\Livewire;
+use Livewire\LivewireServiceProvider;
 
 it('declares the complete admin surface with translation-backed labels', function (): void {
     expect(ExtensionCookbookPage::getNavigationLabel())->toBe('Capell Extension Cookbook')
@@ -270,19 +277,12 @@ it('scopes reference entries, aggregate stats, workflow attention and policy che
     Gate::define('Manage:ExtensionCookbook', static fn (Authenticatable $actor): bool => $actor === $user);
     auth()->setUser($user);
 
-    $statsMethod = new ReflectionMethod(ExtensionCookbookOverviewStat::class, 'getStats');
-    $statsResult = $statsMethod->invoke(new ExtensionCookbookOverviewStat);
+    app()->register(LivewireServiceProvider::class);
+    app()->register(SupportServiceProvider::class);
+    app()->register(WidgetsServiceProvider::class);
 
-    if (! is_array($statsResult)) {
-        throw new RuntimeException('Expected an array of extension cookbook statistics.');
-    }
+    $widget = Livewire::withoutLazyLoading()->test(ExtensionCookbookOverviewStat::class);
 
-    $stats = $statsResult;
-    $stat = $stats[0] ?? null;
-
-    if (! $stat instanceof Stat) {
-        throw new RuntimeException('Expected a typed extension cookbook statistic.');
-    }
     $workflow = new ExtensionCookbookWorkflowAttentionContribution;
     $policy = new ReferenceEntryPolicy;
     $assignedEntry = new ReferenceEntry(['site_id' => 101]);
@@ -290,7 +290,7 @@ it('scopes reference entries, aggregate stats, workflow attention and policy che
     $unassignedEntry = new ReferenceEntry;
 
     expect(ReferenceEntryResource::getEloquentQuery()->pluck('id')->all())->toEqualCanonicalizing([1, 2])
-        ->and($stat->getValue())->toBe('1/2')
+        ->and($widget->html())->toContain('1/2')
         ->and($workflow->attentionItems($user))->toBe([])
         ->and($policy->view($user, $assignedEntry))->toBeTrue()
         ->and($policy->view($user, $otherEntry))->toBeFalse()
@@ -306,14 +306,24 @@ it('scopes reference entries, aggregate stats, workflow attention and policy che
     Schema::dropIfExists('extension_cookbook_entries');
 });
 
-it('does not activate dangerous global replacement seams', function (): void {
-    $bridgeSource = file_get_contents(dirname(__DIR__, 3) . '/src/Bridges/ExtensionCookbookAdminBridge.php');
+it('preserves host dashboard, removal mode, pending installs and settings groups', function (): void {
+    app()->bind(ExtensionRemovalCoordinator::class, InRequestExtensionRemovalCoordinator::class);
+    $dashboardLabel = CapellAdmin::getDashboardPage()::getNavigationLabel();
+    $removalMode = resolve(ExtensionRemovalCoordinator::class)->modeFor('capell-app/extension-cookbook');
+    $pendingInstalls = static fn (): array => collect(app()->tagged(PendingThemeInstallProvider::TAG))
+        ->flatMap(static fn (PendingThemeInstallProvider $provider): array => $provider->pendingThemeInstalls())->all();
+    $pendingBefore = $pendingInstalls();
+    $groupsBefore = resolve(SettingsSchemaRegistry::class)->getGroups();
 
-    expect($bridgeSource)->toBeString()
-        ->and($bridgeSource)->not->toContain('dashboardPage(')
-        ->and($bridgeSource)->not->toContain('extensionRemovalCoordinator(')
-        ->and($bridgeSource)->not->toContain('pendingThemeInstallProvider(')
-        ->and($bridgeSource)->not->toContain('settingsSchema(');
+    (new ExtensionCookbookAdminBridge)->register(
+        resolve(AdminBridgeRegistrar::class),
+        AdminBridgeContextData::forPackage('capell-app/extension-cookbook'),
+    );
+
+    expect(CapellAdmin::getDashboardPage()::getNavigationLabel())->toBe($dashboardLabel)
+        ->and(resolve(ExtensionRemovalCoordinator::class)->modeFor('capell-app/extension-cookbook'))->toBe($removalMode)
+        ->and($pendingInstalls())->toBe($pendingBefore)
+        ->and(resolve(SettingsSchemaRegistry::class)->getGroups())->toBe($groupsBefore);
 });
 
 it('fails closed when workflow attention runs before its table exists', function (): void {

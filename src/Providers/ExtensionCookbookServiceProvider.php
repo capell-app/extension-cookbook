@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Capell\ExtensionCookbook\Providers;
 
+use Capell\Core\Actions\Install\RegisterCommandsInCurrentProcessAction;
 use Capell\Core\Data\BlueprintSubjectDescriptorData;
 use Capell\Core\Data\OutboundEventDefinitionData;
 use Capell\Core\Models\Page;
@@ -29,8 +30,6 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
 
     public static string $packageName = 'capell-app/extension-cookbook';
 
-    private bool $installedRuntimeBooted = false;
-
     #[Override]
     public function configurePackage(Package $package): void
     {
@@ -47,12 +46,8 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
     }
 
     #[Override]
-    protected function bootInstalledPackage(): self
+    protected function bootInstalledRuntime(): void
     {
-        if ($this->installedRuntimeBooted) {
-            return $this;
-        }
-
         $surface = $this->surface();
         $surface->models([ReferenceEntry::class])
             ->blueprintSubject(new BlueprintSubjectDescriptorData('extension-cookbook.entry', 'Capell Extension Cookbook entry', ReferenceEntry::class, self::$packageName))
@@ -65,19 +60,20 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
 
         if ($this->app->runningInConsole()) {
             $this->commands([ExtensionCookbookDoctorCommand::class]);
-            $this->callAfterResolving(Schedule::class, static function (Schedule $schedule): void {
+            if ($this->app->isBooted()) {
+                RegisterCommandsInCurrentProcessAction::run([ExtensionCookbookDoctorCommand::class]);
+            }
+
+            $this->registerSchedule(static function (Schedule $schedule): void {
                 $schedule->job(new AuditExtensionCookbookHealthJob)
                     ->daily()
                     ->withoutOverlapping();
             });
         }
 
-        if ($this->app->bound(ContentGraphRegistry::class)) {
-            $this->app->make(ContentGraphRegistry::class)->register(ReferenceEntryContentGraphExtractor::class);
-        }
-
-        $this->installedRuntimeBooted = true;
-
-        return $this;
+        $this->callAfterResolving(ContentGraphRegistry::class, static function (ContentGraphRegistry $registry): void {
+            $registry->register(ReferenceEntryContentGraphExtractor::class);
+        });
+        $this->app->make(ContentGraphRegistry::class);
     }
 }
