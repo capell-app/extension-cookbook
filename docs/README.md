@@ -3,8 +3,9 @@
 Use these pages when you are building a Capell package and want a concrete,
 tested example of a public extension contract.
 
-- [Overview](overview.md) — package identity, surfaces, status, setup, and the
-  complete contribution catalogue.
+- [Overview](overview.md) — a short note for site owners about the example package.
+- [Contribution map](contribution-map.md) — the developer catalogue, registrar
+  inventory, safety boundaries, and deliberately inactive seams.
 - [Extension points](extension-points.md) — source-traced examples for Core,
   Admin, Frontend, lifecycle, data, health, and content-graph integrations.
 - [Screenshot contract](screenshots.json) — route-backed capture targets and

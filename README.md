@@ -21,7 +21,7 @@ Status details:
 
 ## Why It Matters
 
-**For developers:** Each demonstrated seam has an owning class, a documented registration path, and a focused regression test; deliberately inactive seams are labelled instead of being implied.
+**For developers:** The [contribution map](docs/contribution-map.md) traces each demonstrated seam to its owning class, registration path and focused regression test; deliberately inactive seams are labelled instead of being implied.
 
 **For teams:** The cookbook is MIT-licensed and free to install, so teams can evaluate extension patterns without adopting a commercial feature package or copying undocumented internals.
 
@@ -224,6 +224,12 @@ Screenshot contract: `docs/screenshots.json`.
 
 1. Install the package: `composer require capell-app/extension-cookbook`.
 2. Open the package admin page or resource and verify Capell Extension Cookbook is available.
+
+## Upgrading
+
+No manual steps between minor versions.
+
+Read [CHANGELOG.md](CHANGELOG.md) before upgrading.
 
 ## Next Steps
 

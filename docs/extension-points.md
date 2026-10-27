@@ -5,8 +5,8 @@ PHP classes below reproduce shipped source, including namespaces and imports;
 they are not extra classes to register alongside it. For a new package, replace
 its namespace, owner, keys, translations and view identifiers consistently.
 The [manifest](../capell.json) and [Composer metadata](../composer.json) supply
-the provider buckets and dependencies used here. The [overview](overview.md)
-contains the contribution map and registrar inventory.
+the provider buckets and dependencies used here. The [contribution map](contribution-map.md)
+traces every example and lists the registrar methods.
 
 ## Frontend provider
 
@@ -300,7 +300,8 @@ final class ExtensionCookbookHealthCheck implements ChecksExtensionHealth
         $available = Schema::hasTable($table);
 
         return collect([new DoctorCheckResultData(
-            label: 'Capell Extension Cookbook storage',
+            id: 'legacy.capell.extension.cookbook.storage',
+            label: 'Extension Cookbook: database table present',
             passed: $available,
             message: $available ? 'Extension Cookbook storage is available.' : 'Extension Cookbook storage table is missing.',
             remediation: $available ? null : 'Run the Capell Extension Cookbook migrations.',

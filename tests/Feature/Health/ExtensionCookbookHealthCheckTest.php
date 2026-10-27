@@ -14,5 +14,5 @@ it('returns a bounded typed storage diagnostic', function (): void {
     }
 
     expect($results)->toHaveCount(1)
-        ->and($result->label)->toBe('Capell Extension Cookbook storage');
+        ->and($result->label)->toStartWith('Extension Cookbook: ')->toContain('database');
 });

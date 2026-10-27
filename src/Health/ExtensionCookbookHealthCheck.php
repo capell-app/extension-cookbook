@@ -24,10 +24,11 @@ final class ExtensionCookbookHealthCheck implements ChecksExtensionHealth
         $available = Schema::hasTable($table);
 
         return collect([new DoctorCheckResultData(
-            label: 'Capell Extension Cookbook storage',
+            label: 'Extension Cookbook: database table present',
             passed: $available,
             message: $available ? 'Extension Cookbook storage is available.' : 'Extension Cookbook storage table is missing.',
             remediation: $available ? null : 'Run the Capell Extension Cookbook migrations.',
+            id: 'legacy.capell.extension.cookbook.storage',
         )]);
     }
 

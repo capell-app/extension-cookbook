@@ -29,7 +29,7 @@ return [
     ],
     'fields' => [
         'title' => 'Title',
-        'slug' => 'Slug',
+        'slug' => 'Key',
         'enabled' => 'Enabled',
     ],
     'widget' => [
