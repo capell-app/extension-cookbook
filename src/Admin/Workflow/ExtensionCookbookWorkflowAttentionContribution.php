@@ -7,6 +7,7 @@ namespace Capell\ExtensionCookbook\Admin\Workflow;
 use Capell\Admin\Support\SiteScope;
 use Capell\Core\Contracts\Extensions\ContributesWorkflowAttention;
 use Capell\Core\Data\Workflow\WorkflowAttentionItemData;
+use Capell\Core\Support\TableName;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Gate;
@@ -22,11 +23,11 @@ final class ExtensionCookbookWorkflowAttentionContribution implements Contribute
     /** @return list<WorkflowAttentionItemData> */
     public function attentionItems(?Authenticatable $user = null): array
     {
-        if ($user === null || ! Gate::forUser($user)->allows('View:ExtensionCookbook')) {
+        if (! $user instanceof Authenticatable || ! Gate::forUser($user)->allows('View:ExtensionCookbook')) {
             return [];
         }
 
-        if (! Schema::hasTable('extension_cookbook_entries')) {
+        if (! Schema::hasTable(TableName::resolve('extension_cookbook_entries'))) {
             return [];
         }
 

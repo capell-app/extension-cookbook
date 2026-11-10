@@ -56,6 +56,24 @@ The package's public widget is `Widget\\ExtensionCookbookWidget`, whose key is
 typed `ExtensionCookbookWidgetInputData` and `ExtensionCookbookWidgetRenderData` classes. Public
 views receive those hydrated values only.
 
+## Which registrar?
+
+Start from the shape of `ExtensionCookbookServiceProvider`; it is the pattern to
+copy for a new package. Use this table to pick the call for each job.
+
+| You want to add                                                             | Call                                                                            | Where the cookbook does it                                     |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Models, settings, outbound events, subscribers, metrics, blueprint subjects | `$this->surface()` (`PackageSurfaceRegistrar`)                                  | `bootInstalledRuntime()` in `ExtensionCookbookServiceProvider` |
+| Admin pages, resources and dashboard widgets                                | `CapellAdmin::registerAdminBridge()`, then `AdminBridgeRegistrar` in the bridge | `AdminServiceProvider` and `ExtensionCookbookAdminBridge`      |
+| Frontend components and resources                                           | `FrontendComponentContributor` tag and `FrontendResourceRegistry`               | `FrontendServiceProvider`                                      |
+| Public output injected at a render location                                 | `FrontendHookRegistrar`                                                         | Listed in the registrar coverage below                         |
+
+Choose the provider hook by lifecycle:
+
+- `bootPackage()` runs on every request and is for package metadata only.
+- `bootInstalledRuntime()` runs once per bootstrap while the package is installed and enabled. It is the default for new packages.
+- `bootInstalledPackage()` is the legacy hook. Do not use it in new packages.
+
 ## Registrar method coverage
 
 The following is an explicit inventory against the current Core contracts.

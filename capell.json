@@ -8,7 +8,7 @@
     "version": "1.0.0",
     "description": "A free first-party developer reference for Capell's supported public extension contracts.",
     "product": {
-        "group": "Capell Foundation",
+        "group": "Capell Essentials",
         "tier": "free",
         "bundle": "foundation"
     },
@@ -25,7 +25,9 @@
         "conflicts": []
     },
     "providers": {
-        "metadata": [],
+        "metadata": [
+            "Capell\\ExtensionCookbook\\Providers\\MigrationMetadataServiceProvider"
+        ],
         "install": [],
         "runtime": [
             "Capell\\ExtensionCookbook\\Providers\\ExtensionCookbookServiceProvider"
@@ -131,7 +133,8 @@
         },
         {
             "type": "frontend-component",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookFrontendComponentContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookFrontendComponentContribution",
+            "key": "extension-cookbook.widget"
         },
         {
             "type": "content-widget",
@@ -193,7 +196,9 @@
             "key": "extension-cookbook.entry"
         }
     ],
-    "contributionTraceability": { "deferredContributions": [] },
+    "contributionTraceability": {
+        "deferredContributions": []
+    },
     "database": {
         "migrations": true,
         "settings": true,
@@ -222,7 +227,9 @@
     "security": {
         "riskTier": "standard",
         "publicSurface": {
-            "routeNames": ["capell-extension-cookbook.index"],
+            "routeNames": [
+                "GET /extension-cookbook (capell-extension-cookbook.index)"
+            ],
             "auth": "public",
             "csrfExemptRoutes": [],
             "signedRoutes": [],
@@ -284,6 +291,22 @@
     },
     "marketplace": {
         "summary": "A free developer reference for Capell's supported public extension contracts.",
+        "problem": "Package authors cannot always see how an extension contract works in a complete example.",
+        "outcome": "A site developer has runnable examples of released Capell extension contracts.",
+        "faq": [
+            {
+                "question": "Who is the cookbook for?",
+                "answer": "It is for package authors learning to use released Capell extension contracts."
+            },
+            {
+                "question": "Can examples be run and tested?",
+                "answer": "Yes. The package contains runnable examples and focused tests for their behaviour."
+            },
+            {
+                "question": "Which contracts do examples cover?",
+                "answer": "Examples cover released Core, Admin, Frontend, lifecycle, data, health and content-graph contracts."
+            }
+        ],
         "categories": ["admin", "console", "foundation", "frontend"],
         "screenshots": [
             {

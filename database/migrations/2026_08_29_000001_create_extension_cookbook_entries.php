@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Capell\Core\Support\TableName;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,15 +11,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (Schema::hasTable('extension_cookbook_entries')) {
+        if (TableName::existsAndIsOwned('extension_cookbook_entries', basename(__FILE__, '.php'))) {
             return;
         }
-        Schema::create('extension_cookbook_entries', function (Blueprint $table): void {
+
+        Schema::create(TableName::resolve('extension_cookbook_entries'), function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('site_id')->constrained('sites')->cascadeOnDelete();
+            $table->foreignId('site_id')->constrained(TableName::resolve('sites'))->cascadeOnDelete();
             $table->string('title');
             $table->string('slug');
-            $table->unique('slug', 'extension_cookbook_entries_slug_unique');
+            $table->unique('slug', TableName::namedIndex('extension_cookbook_entries', 'extension_cookbook_entries_slug_unique'));
             $table->text('summary')->nullable();
             $table->longText('body')->nullable();
             $table->boolean('enabled')->default(true)->index();
@@ -31,6 +33,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('extension_cookbook_entries');
+        Schema::dropIfExists(TableName::resolve('extension_cookbook_entries'));
     }
 };

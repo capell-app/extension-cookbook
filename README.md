@@ -2,188 +2,52 @@
 
 <!-- prettier-ignore-start -->
 
-## What This Plugin Adds
-
-Capell Extension Cookbook is an **Available**, **Schema-owning** Capell package in the **Capell Foundation** product group. It ships as `capell-app/extension-cookbook` and extends these surfaces: admin, frontend, shared.
+## What It Does
 
 Extension Cookbook is a free, runnable package of small examples for Capell's released Core, Admin, Frontend, lifecycle, data, health, and content-graph contracts; experimental seams are called out as follow-up gaps.
 
+- **Price and availability:** Check current availability and price on the [Capell Marketplace listing](https://capell.app/extensions/extension-cookbook).
+- **Licence:** Published under MIT in `composer.json`.
+- **Requires:** `PHP ^8.4`, `capell-app/admin ^1.0.72`, `capell-app/core ^1.0.75`, `capell-app/frontend ^1.0.72`, `capell-app/layout-builder ^1.0`, `filament/forms ^5.7.6`, `filament/filament ^5.7.6`, `laravel/framework ^12.61.1|^13.12.0`, `lorisleiva/laravel-actions ^2.8`, `spatie/laravel-data ^4.5`, `spatie/laravel-package-tools ^1.14.1`, `spatie/laravel-settings ^3.0`.
+- **Install:** `composer require capell-app/extension-cookbook`.
+
 Package authors can install one maintained example, follow each contribution from manifest to provider, and copy the focused test that proves its behaviour.
 
-Status details:
-
-- Status: Available
-- Tier: free
-- Bundle: foundation
-- Composer package: `capell-app/extension-cookbook`
-- Namespace: `Capell\ExtensionCookbook`
-- Theme key: not applicable
-
-## Why It Matters
+## Who It Is For
 
 **For developers:** The [contribution map](docs/contribution-map.md) traces each demonstrated seam to its owning class, registration path and focused regression test; deliberately inactive seams are labelled instead of being implied.
 
 **For teams:** The cookbook is MIT-licensed and free to install, so teams can evaluate extension patterns without adopting a commercial feature package or copying undocumented internals.
 
-## Screens And Workflow
+## Quick Start
 
-Screenshot contract: `docs/screenshots.json`.
+1. Install the package: `composer require capell-app/extension-cookbook`.
+2. For developers building a Capell extension: Permission to view the Extension Cookbook (the `View:ExtensionCookbook` permission) in a development environment.
+3. Open `/admin/extension-cookbook`. Under **System**, open **Capell Extension Cookbook** and read the Extension coverage groups, then the Registrar method coverage section. Each card names a contract and whether the cookbook demonstrates it.
+4. Check the result: The page lists every demonstrated contract with its status, so you can pick the first recipe to copy. Next: Open the contribution map in the package docs, find the registrar for that contract in **Which registrar?**, and copy its focused test.
+
+## Configure
+
+- **Configuration files:** `config/extension-cookbook.php`.
+- **Admin settings:** `Capell\ExtensionCookbook\Settings\ExtensionCookbookSettings`.
+- **Commands:** `php artisan capell:extension-cookbook-doctor`.
+
+## Limits And Pitfalls
+
+- Install the required Capell packages at the versions in `composer.json`: `capell-app/admin ^1.0.72`, `capell-app/core ^1.0.75`, `capell-app/frontend ^1.0.72`, `capell-app/layout-builder ^1.0`.
+- Run migrations before opening package resources or public routes.
+- Review middleware, throttling, signatures, and public-output safety in `routes/web.php` before exposing routes.
+- Keep the host Laravel scheduler running so package-registered schedules can execute: `Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookScheduledJobContribution (manifest declared)`.
+- Keep public Blade and cached HTML free of authoring markers, model IDs, permissions, signed editor URLs, and lazy database queries.
+- Custom write integrations must preserve invalidation for `extension-cookbook` cache tags.
+
+## Screens And Workflow
 
 ![Capell Extension Cookbook developer reference package card](docs/assets/marketplace/extension-card.jpg)
 
-- Capell Extension Cookbook in the admin extension catalogue (admin, supplementary evidence).
-- Extension Cookbook widget in Layout Builder (admin, supplementary evidence).
-- Public Capell Extension Cookbook route (frontend, supplementary evidence).
-
-## Technical Shape
-
-### Service providers
-
-- `Capell\ExtensionCookbook\Providers\ExtensionCookbookServiceProvider`
-- `Capell\ExtensionCookbook\Providers\AdminServiceProvider`
-- `Capell\ExtensionCookbook\Providers\FrontendServiceProvider`
-
-### Config files
-
-- `packages/extension-cookbook/config/extension-cookbook.php`
-
-### Migrations
-
-- `packages/extension-cookbook/database/migrations/2026_08_29_000001_create_extension_cookbook_entries.php`
-- `packages/extension-cookbook/database/migrations/2026_08_29_000002_scope_extension_cookbook_entry_slugs.php`
-
-### Settings migrations
-
-- `packages/extension-cookbook/database/settings/2026_08_29_000001_add_extension_cookbook_settings.php`
-
-### Settings classes
-
-- `ExtensionCookbookSettings`
-
-### Models
-
-- `ReferenceEntry`
-
-### Filament classes
-
-- `ExtensionCookbookConfigurator`
-- `ExtensionCookbookAdminActionExtender`
-- `ExtensionCookbookPageSchemaExtender`
-- `ExtensionCookbookPage`
-- `ListReferenceEntries`
-- `ReferenceEntryResource`
-- `ExtensionCookbookSettingsSchema`
-- `ExtensionCookbookDashboardWidget`
-- `ExtensionCookbookOverviewStat`
-
-### Route files
-
-- `packages/extension-cookbook/routes/web.php`
-
-### Policies
-
-- `ReferenceEntryPolicy`
-
-### Events
-
-- `ReferenceEntryPublished`
-
-### Listeners
-
-- `ReferenceEntrySubscriber`
-
-### Actions
-
-- `AfterInstallExtensionCookbookPackageAction`
-- `CreateReferenceEntryAction`
-- `EnsureExtensionCookbookExampleAction`
-- `InstallExtensionCookbookPackageAction`
-- `ReadReferenceEntriesAction`
-- `SetupExtensionCookbookPackageAction`
-- `UninstallExtensionCookbookPackageAction`
-
-### Data objects
-
-- `ReferenceEntryData`
-- `ReferenceEntryPublishedPayloadData`
-
-### Jobs
-
-- `AuditExtensionCookbookHealthJob`
-
-### Command signatures
-
-- `capell:extension-cookbook-doctor`
-
-### Manifest action API
-
-- `afterInstall: Capell\ExtensionCookbook\Actions\AfterInstallExtensionCookbookPackageAction`
-- `install: Capell\ExtensionCookbook\Actions\InstallExtensionCookbookPackageAction`
-- `setup: Capell\ExtensionCookbook\Actions\SetupExtensionCookbookPackageAction`
-- `uninstall: Capell\ExtensionCookbook\Actions\UninstallExtensionCookbookPackageAction`
-
-### Scheduled commands
-
-- `Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookScheduledJobContribution (manifest declared)`
-
-### Console command classes
-
-- `ExtensionCookbookDoctorCommand`
-
-### Manifest contributions
-
-- `admin-action-extender: Capell\ExtensionCookbook\Manifest\Admin\ExtensionCookbookAdminActionExtenderContribution`
-- `admin-page: Capell\ExtensionCookbook\Manifest\Admin\ExtensionCookbookAdminPageContribution`
-- `admin-resource: Capell\ExtensionCookbook\Manifest\Admin\ReferenceEntryResourceContribution`
-- `agent-capability: Capell\ExtensionCookbook\Manifest\Core\ExtensionCookbookAgentCapabilityContribution`
-- `asset: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookAssetContribution`
-- `blueprint-subject: Capell\ExtensionCookbook\Manifest\Core\ExtensionCookbookBlueprintSubjectContribution`
-- `configurator: Capell\ExtensionCookbook\Manifest\Admin\ExtensionCookbookConfiguratorContribution`
-- `console-command: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookConsoleCommandsContribution`
-- `content-graph: Capell\ExtensionCookbook\ContentGraph\ReferenceEntryContentGraphExtractor`
-- `content-widget: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookContentWidgetContribution`
-- `dashboard-widget: Capell\ExtensionCookbook\Manifest\Admin\ExtensionCookbookDashboardWidgetContribution`
-- `dashboard-widget: Capell\ExtensionCookbook\Manifest\Admin\ExtensionCookbookOverviewStatContribution`
-- `frontend-component: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookFrontendComponentContribution`
-- `health-check: Capell\ExtensionCookbook\Health\ExtensionCookbookHealthCheck`
-- `migration: Capell\ExtensionCookbook\Manifest\Core\ExtensionCookbookMigrationContribution`
-- `model: Capell\ExtensionCookbook\Manifest\Core\ReferenceEntryModelContribution`
-- `outbound-event: Capell\ExtensionCookbook\Manifest\Core\ExtensionCookbookOutboundEventContribution`
-- `page-type: Capell\ExtensionCookbook\Manifest\Core\ExtensionCookbookPageTypeContribution`
-- `page-variation: Capell\ExtensionCookbook\Manifest\Core\ExtensionCookbookPageVariationContribution`
-- `permission: Capell\ExtensionCookbook\Manifest\Admin\ExtensionCookbookPermissionsContribution`
-- `render-hook: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookRenderHookContribution`
-- `route: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookRoutesContribution`
-- `scheduled-job: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookScheduledJobContribution`
-- `schema-extender: Capell\ExtensionCookbook\Manifest\Admin\ExtensionCookbookSchemaExtenderContribution`
-- `section: Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookSectionContribution`
-- `setting: Capell\ExtensionCookbook\Manifest\Core\ExtensionCookbookSettingContribution`
-- `workflow-attention: Capell\ExtensionCookbook\Admin\Workflow\ExtensionCookbookWorkflowAttentionContribution`
-
-### Health checks
-
-- `Capell\ExtensionCookbook\Health\ExtensionCookbookHealthCheck`
-
-### Blade views
-
-- `packages/extension-cookbook/resources/views/filament/pages/extension-cookbook.blade.php`
-- `packages/extension-cookbook/resources/views/filament/widgets/dashboard.blade.php`
-- `packages/extension-cookbook/resources/views/frontend/index.blade.php`
-- `packages/extension-cookbook/resources/views/widget/extension-cookbook.blade.php`
-
-### Cache tags
-
-- `extension-cookbook`
-
-
-## Data Model
-
-- Required tables: `extension_cookbook_entries`.
-- Models: `ReferenceEntry`.
-- Core record references in migrations: `sites via site_id`.
-- Migration files: `2026_08_29_000001_create_extension_cookbook_entries.php`, `2026_08_29_000002_scope_extension_cookbook_entry_slugs.php`.
-- Migration impact: run host migrations through the package install flow before opening package surfaces.
-- Deletion/retention behaviour: migrations declare cascade-on-delete relationships; no timed pruning or retention schedule is declared in `capell.json`.
+- Capell Extension Cookbook in the admin extension catalogue (admin).
+- Extension Cookbook widget in Layout Builder (admin).
+- Public Capell Extension Cookbook route (frontend).
 
 ## Install Impact
 
@@ -199,16 +63,6 @@ Screenshot contract: `docs/screenshots.json`.
 - Cache tags: `extension-cookbook`.
 - Commands: `capell:extension-cookbook-doctor`.
 
-## Common Pitfalls
-
-- Keep required Capell packages on compatible v4 releases: `capell-app/admin`, `capell-app/core`, `capell-app/frontend`, `capell-app/layout-builder`.
-- Run migrations before opening package resources or public routes.
-- Review package configuration before production-like verification: `config/extension-cookbook.php`, `Capell\ExtensionCookbook\Settings\ExtensionCookbookSettings`.
-- Review middleware, throttling, signatures, and public-output safety in `routes/web.php` before exposing routes.
-- Keep the host Laravel scheduler running so package-registered schedules can execute: `Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookScheduledJobContribution (manifest declared)`.
-- Keep public Blade and cached HTML free of authoring markers, model IDs, permissions, signed editor URLs, and lazy database queries.
-- Custom write integrations must preserve invalidation for `extension-cookbook` cache tags.
-
 ## Troubleshooting
 
 | Symptom | Likely cause | Check | Fix |
@@ -219,11 +73,6 @@ Screenshot contract: `docs/screenshots.json`.
 | Route returns unexpected output | Route cache, middleware, or signed URL setup does not match the package route file | Check the route files listed in `Technical Shape` | Clear route cache and verify middleware before exposing public routes |
 | Background work does not run | Queue worker or declared schedule is not active | Check the jobs and scheduled commands listed in `Technical Shape` | Start the queue worker or host scheduler, then run the focused command or package test |
 | Public output leaks unexpected state | Render data, cache variation, or authoring boundary has regressed | Check public Blade, cache tags, and public-output safety tests | Move data loading out of Blade and rerun the package public-output tests |
-
-## Quick Start
-
-1. Install the package: `composer require capell-app/extension-cookbook`.
-2. Open the package admin page or resource and verify Capell Extension Cookbook is available.
 
 ## Upgrading
 
@@ -238,7 +87,7 @@ Read [CHANGELOG.md](CHANGELOG.md) before upgrading.
 - [Worked extension examples](docs/extension-contracts.md)
 - Configuration files: [`config/extension-cookbook.php`](config/extension-cookbook.php).
 - [Troubleshooting](#troubleshooting)
-- [Screenshot contract](docs/screenshots.json)
+- [Developer reference](docs/reference.md)
 - [Marketplace assets](docs/assets/marketplace/)
 - [Capell content language plan](../../docs/CONTENT_LANGUAGE_PLAN.md)
 - [Capell documentation design system](../../docs/DESIGN_SYSTEM.md)

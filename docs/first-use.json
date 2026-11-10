@@ -1,0 +1,8 @@
+{
+    "audience": "developers building a Capell extension",
+    "prerequisites": "Permission to view the Extension Cookbook (the `View:ExtensionCookbook` permission) in a development environment.",
+    "destination": "/admin/extension-cookbook",
+    "task": "Under **System**, open **Capell Extension Cookbook** and read the Extension coverage groups, then the Registrar method coverage section. Each card names a contract and whether the cookbook demonstrates it.",
+    "expectedResult": "The page lists every demonstrated contract with its status, so you can pick the first recipe to copy.",
+    "nextStep": "Open the contribution map in the package docs, find the registrar for that contract in **Which registrar?**, and copy its focused test."
+}

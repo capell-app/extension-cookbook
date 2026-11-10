@@ -9,6 +9,7 @@ use Capell\Core\Support\CapellCoreManager;
 use Capell\Core\Support\Metrics\MetricCollectorRegistry;
 use Capell\Core\Support\OutboundEventRegistry;
 use Capell\Core\Support\Packages\PackageSurfaceRegistrar;
+use Capell\Core\Support\Security\SecurityWeaknessRegistry;
 use Capell\Core\Support\Settings\SettingsSchemaRegistry;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use Capell\ExtensionCookbook\Settings\ExtensionCookbookSettings;
@@ -25,6 +26,8 @@ it('keeps page type and settings schema registration canonical', function (): vo
         resolve(OutboundEventRegistry::class),
         $subjects,
         resolve(RecordsExtensionContributionReceipt::class),
+        resolve(SecurityWeaknessRegistry::class),
+        app(),
     ))
         ->blueprintSubject(new BlueprintSubjectDescriptorData(
             'extension-cookbook.entry',

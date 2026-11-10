@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Capell\ExtensionCookbook\Actions;
 
 use Capell\Core\Models\Site;
+use Capell\Core\Support\TableName;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 use Illuminate\Support\Facades\Schema;
 use Lorisleiva\Actions\Concerns\AsFake;
@@ -23,7 +24,7 @@ final class EnsureExtensionCookbookExampleAction
     {
         $table = (new ReferenceEntry)->getTable();
 
-        if (! Schema::hasTable($table) || ! Schema::hasTable('sites')) {
+        if (! Schema::hasTable($table) || ! Schema::hasTable(TableName::resolve('sites'))) {
             return [];
         }
 

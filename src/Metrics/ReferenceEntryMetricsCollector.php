@@ -25,6 +25,7 @@ use Capell\Core\Enums\Metrics\MetricSource;
 use Capell\Core\Enums\Metrics\MetricValueType;
 use Capell\Core\Enums\Metrics\MetricVisibility;
 use Capell\Core\Enums\MetricUnitEnum;
+use Capell\Core\Support\TableName;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
 
 final class ReferenceEntryMetricsCollector implements CollectsDailyMetrics
@@ -40,6 +41,7 @@ final class ReferenceEntryMetricsCollector implements CollectsDailyMetrics
         if ($global === [] || count($global) !== count($scopes)) {
             return new MetricCollectionResultData(MetricCollectionStatus::Unsupported, $day, [], [], null, null, 'Global scopes only.');
         }
+
         $definition = $this->definition();
         $samples = array_map(fn (MetricScopeData $scope): MetricSampleData => new MetricSampleData($definition->identity, $definition->semanticHash(), $day, $scope, $definition->representation, MetricValueData::integer(ReferenceEntry::query()->enabled()->count())), $global);
 
@@ -48,6 +50,6 @@ final class ReferenceEntryMetricsCollector implements CollectsDailyMetrics
 
     private function definition(): MetricDefinitionData
     {
-        return new MetricDefinitionData(new MetricIdentityData('capell-app/extension-cookbook', 'showcase', 'entries_enabled'), new MetricRepresentationData(MetricUnitEnum::Count, MetricValueType::Integer), MetricScopeType::Global, new MetricSemanticsData(MetricSemantic::Gauge, MetricAggregation::Last, MetricGapPolicy::Missing, MetricBackfillPolicy::CurrentDayOnly), new MetricGovernanceData(MetricSource::Database, 'extension_cookbook_entries', MetricSensitivity::Internal, MetricVisibility::SiteAdmin), labels: ['en' => 'Enabled showcase entries'], descriptions: ['en' => 'Number of enabled Capell Extension Cookbook entries.']);
+        return new MetricDefinitionData(new MetricIdentityData('capell-app/extension-cookbook', 'showcase', 'entries_enabled'), new MetricRepresentationData(MetricUnitEnum::Count, MetricValueType::Integer), MetricScopeType::Global, new MetricSemanticsData(MetricSemantic::Gauge, MetricAggregation::Last, MetricGapPolicy::Missing, MetricBackfillPolicy::CurrentDayOnly), new MetricGovernanceData(MetricSource::Database, TableName::resolve('extension_cookbook_entries'), MetricSensitivity::Internal, MetricVisibility::SiteAdmin), labels: ['en' => 'Enabled showcase entries'], descriptions: ['en' => 'Number of enabled Capell Extension Cookbook entries.']);
     }
 }

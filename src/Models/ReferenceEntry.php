@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Capell\ExtensionCookbook\Models;
 
+use Capell\Core\Concerns\HasCapellTable;
 use Capell\Core\Models\Concerns\HasBlueprint;
 use Capell\Core\Models\Contracts\Blueprintable;
 use Capell\Core\Models\Page;
 use Capell\Core\Models\Site;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Override;
 
 /**
  * @property string $title
@@ -22,6 +26,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class ReferenceEntry extends Model implements Blueprintable
 {
     use HasBlueprint;
+    use HasCapellTable;
+
+    /** @use HasFactory<Factory<static>> */
+    use HasFactory;
 
     protected $table = 'extension_cookbook_entries';
 
@@ -40,11 +48,12 @@ final class ReferenceEntry extends Model implements Blueprintable
     }
 
     /** @param Builder<self> $query */
-    public function scopeEnabled(Builder $query): void
+    protected function scopeEnabled(Builder $query): void
     {
         $query->where('enabled', true);
     }
 
+    #[Override]
     protected function casts(): array
     {
         return ['enabled' => 'bool', 'site_id' => 'int', 'related_page_id' => 'int', 'blueprint_id' => 'int', 'metadata' => 'array'];

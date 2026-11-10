@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Capell\Core\Support\TableName;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -17,34 +18,34 @@ return new class extends Migration
 
     public function up(): void
     {
-        if (! Schema::hasTable(self::TABLE)
-            || ! Schema::hasColumn(self::TABLE, 'site_id')
-            || ! Schema::hasColumn(self::TABLE, 'slug')) {
+        if (! Schema::hasTable(TableName::resolve(self::TABLE))
+            || ! Schema::hasColumn(TableName::resolve(self::TABLE), 'site_id')
+            || ! Schema::hasColumn(TableName::resolve(self::TABLE), 'slug')) {
             return;
         }
 
         foreach ($this->globalSlugIndexes() as $index) {
-            Schema::table(self::TABLE, function (Blueprint $table) use ($index): void {
+            Schema::table(TableName::resolve(self::TABLE), function (Blueprint $table) use ($index): void {
                 $table->dropUnique($index);
             });
         }
 
-        if (! Schema::hasIndex(self::TABLE, self::UNIQUE_INDEX)) {
-            Schema::table(self::TABLE, function (Blueprint $table): void {
-                $table->unique(['site_id', 'slug'], self::UNIQUE_INDEX);
+        if (! Schema::hasIndex(TableName::resolve(self::TABLE), TableName::namedIndex('extension_cookbook_entries', self::UNIQUE_INDEX))) {
+            Schema::table(TableName::resolve(self::TABLE), function (Blueprint $table): void {
+                $table->unique(['site_id', 'slug'], TableName::namedIndex('extension_cookbook_entries', self::UNIQUE_INDEX));
             });
         }
     }
 
     public function down(): void
     {
-        if (! Schema::hasTable(self::TABLE)
-            || ! Schema::hasColumn(self::TABLE, 'site_id')
-            || ! Schema::hasColumn(self::TABLE, 'slug')) {
+        if (! Schema::hasTable(TableName::resolve(self::TABLE))
+            || ! Schema::hasColumn(TableName::resolve(self::TABLE), 'site_id')
+            || ! Schema::hasColumn(TableName::resolve(self::TABLE), 'slug')) {
             return;
         }
 
-        if (DB::table(self::TABLE)
+        if (DB::table(TableName::resolve(self::TABLE))
             ->select('slug')
             ->whereNotNull('slug')
             ->groupBy('slug')
@@ -55,21 +56,21 @@ return new class extends Migration
             );
         }
 
-        if (Schema::hasIndex(self::TABLE, self::UNIQUE_INDEX)) {
-            if (! $this->hasIndexForColumn('site_id', self::UNIQUE_INDEX)) {
-                Schema::table(self::TABLE, function (Blueprint $table): void {
-                    $table->index('site_id', 'extension_cookbook_entries_site_id_index');
+        if (Schema::hasIndex(TableName::resolve(self::TABLE), TableName::namedIndex('extension_cookbook_entries', self::UNIQUE_INDEX))) {
+            if (! $this->hasIndexForColumn('site_id', TableName::namedIndex('extension_cookbook_entries', self::UNIQUE_INDEX))) {
+                Schema::table(TableName::resolve(self::TABLE), function (Blueprint $table): void {
+                    $table->index('site_id', TableName::namedIndex('extension_cookbook_entries', 'extension_cookbook_entries_site_id_index'));
                 });
             }
 
-            Schema::table(self::TABLE, function (Blueprint $table): void {
-                $table->dropUnique(self::UNIQUE_INDEX);
+            Schema::table(TableName::resolve(self::TABLE), function (Blueprint $table): void {
+                $table->dropUnique(TableName::namedIndex('extension_cookbook_entries', self::UNIQUE_INDEX));
             });
         }
 
         if ($this->globalSlugIndexes() === []) {
-            Schema::table(self::TABLE, function (Blueprint $table): void {
-                $table->unique('slug', self::LEGACY_INDEX);
+            Schema::table(TableName::resolve(self::TABLE), function (Blueprint $table): void {
+                $table->unique('slug', TableName::namedIndex('extension_cookbook_entries', self::LEGACY_INDEX));
             });
         }
     }
@@ -79,8 +80,8 @@ return new class extends Migration
     {
         $indexes = [];
 
-        foreach (Schema::getIndexes(self::TABLE) as $index) {
-            if ((bool) ($index['unique'] ?? false) !== true || ($index['columns'] ?? []) !== ['slug']) {
+        foreach (Schema::getIndexes(TableName::resolve(self::TABLE)) as $index) {
+            if (! (bool) ($index['unique'] ?? false) || ($index['columns'] ?? []) !== ['slug']) {
                 continue;
             }
 
@@ -96,7 +97,7 @@ return new class extends Migration
 
     private function hasIndexForColumn(string $column, ?string $except = null): bool
     {
-        foreach (Schema::getIndexes(self::TABLE) as $index) {
+        foreach (Schema::getIndexes(TableName::resolve(self::TABLE)) as $index) {
             if ($except !== null && ($index['name'] ?? null) === $except) {
                 continue;
             }

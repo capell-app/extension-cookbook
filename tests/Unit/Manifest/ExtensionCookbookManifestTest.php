@@ -73,9 +73,11 @@ it('keeps provider buckets aligned with the runtime-role contract', function ():
     $policy = new RuntimeRoleProviderPolicy;
 
     expect($policy->extensionProviders($providers, RuntimeRole::Public))->toBe([
+        'Capell\\ExtensionCookbook\\Providers\\MigrationMetadataServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\ExtensionCookbookServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\FrontendServiceProvider',
     ])->and($policy->extensionProviders($providers, RuntimeRole::Combined))->toBe([
+        'Capell\\ExtensionCookbook\\Providers\\MigrationMetadataServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\ExtensionCookbookServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\AdminServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\FrontendServiceProvider',
@@ -133,9 +135,11 @@ it('loads the enabled package through the installed runtime-role provider matrix
     );
 
     expect($publicLoader->collectProviders())->toBe([
+        'Capell\\ExtensionCookbook\\Providers\\MigrationMetadataServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\ExtensionCookbookServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\FrontendServiceProvider',
     ])->and($authoringLoader->collectProviders())->toBe([
+        'Capell\\ExtensionCookbook\\Providers\\MigrationMetadataServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\ExtensionCookbookServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\AdminServiceProvider',
         'Capell\\ExtensionCookbook\\Providers\\FrontendServiceProvider',
@@ -182,5 +186,5 @@ it('loads no runtime providers for a disabled package', function (): void {
             configuredValue: RuntimeRole::Public->value,
             valid: true,
         )),
-    )->collectProviders())->toBe([]);
+    )->collectProviders())->toBe(['Capell\\ExtensionCookbook\\Providers\\MigrationMetadataServiceProvider']);
 });

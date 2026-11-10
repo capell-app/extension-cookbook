@@ -1,0 +1,11 @@
+{
+    "create_extension_cookbook_entries": {
+        "names": [
+            "2026_08_29_000001_create_extension_cookbook_entries"
+        ],
+        "sha256": [
+            "1eacd8d88e9150bb16fd9ce0ac4c72a177a46e647bcc7c432d35e7106606a644",
+            "630270afa8320da6ac8c72487d9f757c002effb911f56b403e02be5e8ed8c06a"
+        ]
+    }
+}
