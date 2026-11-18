@@ -6,7 +6,7 @@ Developer reference for `capell-app/extension-cookbook`. Start with the [README]
 
 ## Package Details
 
-Capell Extension Cookbook is an **Available**, **Schema-owning** Capell package in the **Capell Essentials** product group. It ships as `capell-app/extension-cookbook` and extends these surfaces: admin, frontend, shared.
+Capell Extension Cookbook is an **Available** Capell package in the **Capell Essentials** product group. It ships as `capell-app/extension-cookbook` and extends these surfaces: admin, frontend, shared.
 
 - Status: Available
 - Tier: free
@@ -32,6 +32,9 @@ Capell Extension Cookbook is an **Available**, **Schema-owning** Capell package 
 
 - `packages/extension-cookbook/database/migrations/2026_08_29_000001_create_extension_cookbook_entries.php`
 - `packages/extension-cookbook/database/migrations/2026_08_29_000002_scope_extension_cookbook_entry_slugs.php`
+- `packages/extension-cookbook/database/migrations/2026_11_14_000001_create_extension_cookbook_guides.php`
+- `packages/extension-cookbook/database/migrations/2026_11_14_000002_add_publish_dates_to_extension_cookbook_guides.php`
+- `packages/extension-cookbook/database/migrations/2026_11_15_000001_add_layout_to_extension_cookbook_guides.php`
 
 ### Settings migrations
 
@@ -44,10 +47,12 @@ Capell Extension Cookbook is an **Available**, **Schema-owning** Capell package 
 ### Models
 
 - `ReferenceEntry`
+- `ReferenceGuide`
 
 ### Filament classes
 
 - `ExtensionCookbookConfigurator`
+- `ExtensionCookbookSectionConfigurator`
 - `ExtensionCookbookAdminActionExtender`
 - `ExtensionCookbookPageSchemaExtender`
 - `ExtensionCookbookPage`
@@ -150,6 +155,7 @@ Capell Extension Cookbook is an **Available**, **Schema-owning** Capell package 
 - `packages/extension-cookbook/resources/views/filament/pages/extension-cookbook.blade.php`
 - `packages/extension-cookbook/resources/views/filament/widgets/dashboard.blade.php`
 - `packages/extension-cookbook/resources/views/frontend/index.blade.php`
+- `packages/extension-cookbook/resources/views/section/reference-note.blade.php`
 - `packages/extension-cookbook/resources/views/widget/extension-cookbook.blade.php`
 
 ### Cache tags
@@ -160,10 +166,10 @@ Capell Extension Cookbook is an **Available**, **Schema-owning** Capell package 
 ## Data Model
 
 - Required tables: `extension_cookbook_entries`.
-- Models: `ReferenceEntry`.
-- Core record references in migrations: `sites via site_id`.
-- Migration files: `2026_08_29_000001_create_extension_cookbook_entries.php`, `2026_08_29_000002_scope_extension_cookbook_entry_slugs.php`.
+- Models: `ReferenceEntry`, `ReferenceGuide`.
+- Core record references in migrations: `sites via site_id`, `layouts via layout_id`.
+- Migration files: `2026_08_29_000001_create_extension_cookbook_entries.php`, `2026_08_29_000002_scope_extension_cookbook_entry_slugs.php`, `2026_11_14_000001_create_extension_cookbook_guides.php`, `2026_11_14_000002_add_publish_dates_to_extension_cookbook_guides.php`, `2026_11_15_000001_add_layout_to_extension_cookbook_guides.php`.
 - Migration impact: run host migrations through the package install flow before opening package surfaces.
-- Deletion/retention behaviour: migrations declare cascade-on-delete relationships; no timed pruning or retention schedule is declared in `capell.json`.
+- Deletion/retention behaviour: migrations declare cascade-on-delete relationships and null-on-delete relationships; no timed pruning or retention schedule is declared in `capell.json`.
 
 <!-- prettier-ignore-end -->

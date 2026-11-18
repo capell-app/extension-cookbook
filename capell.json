@@ -6,7 +6,7 @@
     "kind": "package",
     "capellApiVersion": "^1.0",
     "version": "1.0.0",
-    "description": "A free first-party developer reference for Capell's supported public extension contracts.",
+    "description": "A small working sample extension for developers that shows which Capell extension points it covers, with a widget and health check.",
     "product": {
         "group": "Capell Essentials",
         "tier": "free",
@@ -21,7 +21,7 @@
             "capell-app/frontend",
             "capell-app/layout-builder"
         ],
-        "supports": [],
+        "supports": ["capell-app/content-sections"],
         "conflicts": []
     },
     "providers": {
@@ -63,7 +63,8 @@
         },
         {
             "type": "section",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookSectionContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Frontend\\ExtensionCookbookSectionContribution",
+            "key": "extension-cookbook-note"
         },
         {
             "type": "page-type",
@@ -129,7 +130,8 @@
         },
         {
             "type": "page-variation",
-            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookPageVariationContribution"
+            "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookPageVariationContribution",
+            "key": "reference-guide"
         },
         {
             "type": "frontend-component",
@@ -154,10 +156,16 @@
         {
             "type": "migration",
             "class": "Capell\\ExtensionCookbook\\Manifest\\Core\\ExtensionCookbookMigrationContribution",
-            "tables": ["extension_cookbook_entries"],
+            "tables": [
+                "extension_cookbook_entries",
+                "extension_cookbook_guides"
+            ],
             "migrationFiles": [
                 "2026_08_29_000001_create_extension_cookbook_entries",
-                "2026_08_29_000002_scope_extension_cookbook_entry_slugs"
+                "2026_08_29_000002_scope_extension_cookbook_entry_slugs",
+                "2026_11_14_000001_create_extension_cookbook_guides",
+                "2026_11_14_000002_add_publish_dates_to_extension_cookbook_guides",
+                "2026_11_15_000001_add_layout_to_extension_cookbook_guides"
             ]
         },
         {
@@ -290,29 +298,34 @@
         "privateDocsRequested": false
     },
     "marketplace": {
-        "summary": "A free developer reference for Capell's supported public extension contracts.",
-        "problem": "Package authors cannot always see how an extension contract works in a complete example.",
-        "outcome": "A site developer has runnable examples of released Capell extension contracts.",
+        "summary": "A sample extension for developers with a coverage list, example records, a widget and a health check to read and copy from. Site owners can skip it.",
+        "description": "Capell Extension Cookbook is a developer reference, not a feature for editors or visitors. It adds a coverage page under Developer that marks the main ways of plugging into Capell as Demonstrated or Deliberately inactive, a list of sample Reference entries, one sample page widget with a required title and summary, a sample health check and a doctor command. Permissions control who can view the page and who can change entries. Installing it also creates a public page at /extension-cookbook.",
+        "problem": "Building a first extension is slow without a complete working example of how the pieces connect.",
+        "outcome": "A developer sees what a working extension covers and copies from a small example that runs.",
         "faq": [
             {
-                "question": "Who is the cookbook for?",
-                "answer": "It is for package authors learning to use released Capell extension contracts."
+                "question": "Does my site need Extension Cookbook?",
+                "answer": "No. It's for developers building their first Capell package, who can read and copy from a small one that already works. A site owner gets nothing from it and can leave it out."
             },
             {
-                "question": "Can examples be run and tested?",
-                "answer": "Yes. The package contains runnable examples and focused tests for their behaviour."
+                "question": "What does it add to my admin and my website?",
+                "answer": "In the Developer section of the admin it adds a coverage list and a list of made-up Reference entries. It also adds a public page at /extension-cookbook where any visitor sees the titles of the enabled entries."
             },
             {
-                "question": "Which contracts do examples cover?",
-                "answer": "Examples cover released Core, Admin, Frontend, lifecycle, data, health and content-graph contracts."
+                "question": "Should I remove it before the site goes live?",
+                "answer": "Yes, if you only needed it for learning. Otherwise its public page stays on your website for anyone to open."
+            },
+            {
+                "question": "What has to be installed before I can add it?",
+                "answer": "The admin, the website and Layout Builder. It needs all three installed first."
             }
         ],
         "categories": ["admin", "console", "foundation", "frontend"],
         "screenshots": [
             {
                 "path": "docs/assets/marketplace/extension-card.jpg",
-                "alt": "Capell Extension Cookbook developer reference package card",
-                "caption": "Capell Extension Cookbook package reference"
+                "alt": "Marketplace card with a cut-off title, two checklist panels labelled Find and Trace and a three-step diagram",
+                "caption": "The card that represents Extension Cookbook on its Marketplace listing."
             }
         ],
         "sales_pitch": "Capell Extension Cookbook is a free developer reference for the supported public extension contracts in Capell. It demonstrates package-owned models, typed Actions and data, lifecycle registration, settings, outbound events, blueprint subjects, metrics, and scoped page integration. The example stays deliberately small and safe so developers can trace registration before building a production package. Use it as a reference for public package surfaces, not as a replacement for your domain or private internals. Review the documentation and tests before adapting it."

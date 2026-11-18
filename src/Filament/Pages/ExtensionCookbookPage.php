@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Capell\ExtensionCookbook\Filament\Pages;
 
+use Capell\Admin\Enums\NavigationGroupEnum;
 use Capell\ExtensionCookbook\Support\Admin\ExtensionCookbookCoverageCatalogue;
 use Filament\Pages\Page;
 use Filament\Panel;
@@ -22,9 +23,9 @@ final class ExtensionCookbookPage extends Page
     }
 
     #[Override]
-    public static function getNavigationGroup(): string
+    public static function getNavigationGroup(): NavigationGroupEnum
     {
-        return (string) __('capell-extension-cookbook::admin.navigation.group');
+        return NavigationGroupEnum::Developer;
     }
 
     #[Override]

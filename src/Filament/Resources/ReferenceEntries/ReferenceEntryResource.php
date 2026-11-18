@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Capell\ExtensionCookbook\Filament\Resources\ReferenceEntries;
 
 use BackedEnum;
+use Capell\Admin\Enums\NavigationGroupEnum;
 use Capell\Admin\Support\SiteScope;
 use Capell\ExtensionCookbook\Filament\Resources\ReferenceEntries\Pages\ListReferenceEntries;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
@@ -58,9 +59,9 @@ final class ReferenceEntryResource extends Resource
     }
 
     #[Override]
-    public static function getNavigationGroup(): string
+    public static function getNavigationGroup(): NavigationGroupEnum
     {
-        return (string) __('capell-extension-cookbook::admin.navigation.group');
+        return NavigationGroupEnum::Developer;
     }
 
     #[Override]

@@ -42,6 +42,9 @@ final class ExtensionCookbookServiceProvider extends AbstractPackageServiceProvi
             ->hasMigrations([
                 '2026_08_29_000001_create_extension_cookbook_entries',
                 '2026_08_29_000002_scope_extension_cookbook_entry_slugs',
+                '2026_11_14_000001_create_extension_cookbook_guides',
+                '2026_11_14_000002_add_publish_dates_to_extension_cookbook_guides',
+                '2026_11_15_000001_add_layout_to_extension_cookbook_guides',
             ]);
     }
 

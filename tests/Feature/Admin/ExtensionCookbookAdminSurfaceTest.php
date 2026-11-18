@@ -6,6 +6,7 @@ use Capell\Admin\Contracts\Extensions\ExtensionRemovalCoordinator;
 use Capell\Admin\Contracts\Themes\PendingThemeInstallProvider;
 use Capell\Admin\Data\Bridges\AdminBridgeContextData;
 use Capell\Admin\Enums\DashboardEnum;
+use Capell\Admin\Enums\NavigationGroupEnum;
 use Capell\Admin\Facades\CapellAdmin;
 use Capell\Admin\Support\Bridges\AdminBridgeRegistrar;
 use Capell\Admin\Support\Extensions\InRequestExtensionRemovalCoordinator;
@@ -46,7 +47,7 @@ use Livewire\LivewireServiceProvider;
 it('declares the complete admin surface with translation-backed labels', function (): void {
     expect(ExtensionCookbookPage::getNavigationLabel())->toBe('Capell Extension Cookbook')
         ->and(ReferenceEntryResource::getNavigationLabel())->toBe('Reference entries')
-        ->and(ReferenceEntryResource::getNavigationGroup())->toBe('System')
+        ->and(ReferenceEntryResource::getNavigationGroup())->toBe(NavigationGroupEnum::Developer)
         ->and(ReferenceEntryResource::getPages())->toHaveKey('index')
         ->and(ExtensionCookbookConfigurator::getKey())->toBe('extension-cookbook');
 });
@@ -97,15 +98,11 @@ it('keeps the catalogue typed and complete across the three admin groups', funct
         ->and($catalogueTypes)->toBe($expectedTypes)
         ->and(collect($catalogue['Admin'])->pluck('type'))->toContain('admin-resource', 'admin-page', 'configurator', 'permission')
         ->and(collect($catalogue)->flatten(1)->keyBy('type')->only([
-            'section',
-            'page-variation',
             'agent-capability',
         ])->pluck('status')->unique()->sort()->values()->all())->toBe([
             'Deliberately inactive',
         ])
         ->and(collect($catalogue)->flatten(1)->keyBy('type')->except([
-            'section',
-            'page-variation',
             'agent-capability',
         ])->pluck('status')->unique()->all())->toBe([
             'Demonstrated',

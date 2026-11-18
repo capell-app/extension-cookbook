@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Capell\ExtensionCookbook\Providers;
 
 use Capell\Core\Contracts\Extensions\RecordsExtensionContributionReceipt;
+use Capell\Core\Data\PageVariationData;
 use Capell\Core\Enums\ExtensionContributionType;
 use Capell\Core\Enums\PresentationLoadingStrategy;
+use Capell\Core\Facades\CapellCore;
 use Capell\Core\Support\Packages\RegistersInstalledRuntime;
+use Capell\ExtensionCookbook\Bridges\ExtensionCookbookSectionDefinitionProvider;
+use Capell\ExtensionCookbook\Models\ReferenceGuide;
 use Capell\ExtensionCookbook\Support\Frontend\ExtensionCookbookFrontendComponentContributor;
 use Capell\ExtensionCookbook\Support\Frontend\ExtensionCookbookRenderHook;
 use Capell\ExtensionCookbook\Widget\ExtensionCookbookWidget;
@@ -30,6 +34,8 @@ use Override;
 final class FrontendServiceProvider extends ServiceProvider
 {
     use RegistersInstalledRuntime;
+
+    public const string PAGE_VARIATION = 'reference-guide';
 
     #[Override]
     public function register(): void
@@ -63,6 +69,9 @@ final class FrontendServiceProvider extends ServiceProvider
                 'frontend',
             );
         }
+
+        $this->registerSectionRecipe();
+        $this->registerPageVariationRecipe();
 
         $this->callAfterResolving(FrontendResourceRegistry::class, static function (FrontendResourceRegistry $registry): void {
             $registry->register(new FrontendResourceGroupData(
@@ -114,5 +123,40 @@ final class FrontendServiceProvider extends ServiceProvider
             );
         });
         $this->app->make(FrontendHookRegistrar::class);
+    }
+
+    /**
+     * Content Sections is optional: tag the provider only when Content Sections is available.
+     */
+    private function registerSectionRecipe(): void
+    {
+        if (! CapellCore::isPackageAvailable('capell-app/content-sections')) {
+            return;
+        }
+
+        $this->app->scoped(ExtensionCookbookSectionDefinitionProvider::class);
+        $this->app->tag(ExtensionCookbookSectionDefinitionProvider::class, ExtensionCookbookSectionDefinitionProvider::TAG);
+        $this->app->make(RecordsExtensionContributionReceipt::class)->recordContributionFromSource(
+            ExtensionContributionType::Section,
+            ExtensionCookbookSectionDefinitionProvider::KEY,
+            ExtensionCookbookSectionDefinitionProvider::class,
+            ExtensionCookbookSectionDefinitionProvider::class,
+            'frontend',
+        );
+    }
+
+    private function registerPageVariationRecipe(): void
+    {
+        CapellCore::registerPageVariation(new PageVariationData(
+            name: self::PAGE_VARIATION,
+            model: ReferenceGuide::class,
+        ));
+        $this->app->make(RecordsExtensionContributionReceipt::class)->recordContributionFromSource(
+            ExtensionContributionType::PageVariation,
+            self::PAGE_VARIATION,
+            ReferenceGuide::class,
+            self::class,
+            'frontend',
+        );
     }
 }

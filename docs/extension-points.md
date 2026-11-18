@@ -585,12 +585,43 @@ $package = new PackageData('capell-app/extension-cookbook', PackageTypeEnum::Plu
 UninstallExtensionCookbookPackageAction::run($package);
 ```
 
+## Content section
+
+`ExtensionCookbookSectionDefinitionProvider` implements
+`Capell\ContentSections\Contracts\SectionDefinitionProvider` and returns one
+`SectionDefinitionData` pointing at `ExtensionCookbookSectionConfigurator` and
+the `capell-extension-cookbook::section.reference-note` Blade component.
+Content Sections is optional, so `FrontendServiceProvider` tags the provider
+with `SectionDefinitionProvider::TAG` only when Content Sections is available, and the
+package `composer.json` lists `capell-app/content-sections` under `suggest`.
+The registration runs only while the cookbook is installed and enabled.
+
+```php
+if (CapellCore::isPackageAvailable('capell-app/content-sections')) {
+    $this->app->tag(ExtensionCookbookSectionDefinitionProvider::class, ExtensionCookbookSectionDefinitionProvider::TAG);
+}
+```
+
+## Page variation
+
+`ReferenceEntry` is a plain blueprint-backed record and does not implement
+`Capell\Core\Contracts\Pageable`, so it cannot own page URLs. The cookbook
+adds `ReferenceGuide`, a small `Pageable` model with translations, and
+registers it while the cookbook is installed and enabled.
+
+```php
+CapellCore::registerPageVariation(new PageVariationData(
+    name: 'reference-guide',
+    model: ReferenceGuide::class,
+));
+```
+
 ## Deliberately inactive surfaces
 
 Manifest marker classes remain for all 27 current contribution types so the
 manifest is auditable. Types without a corresponding public runtime registrar
-in this package are explicitly inactive in the overview: sections, page
-variations and agent capabilities. Workflow attention is a conditional
+in this package are explicitly inactive in the overview: agent capabilities.
+Workflow attention is a conditional
 contribution that emits an item only with its supported actor and context.
 
 The package avoids broad admin replacement seams and does not introduce

@@ -1,0 +1,63 @@
+[
+    {
+        "claim": "Developers building their first Capell extension can read and copy from a small one that already works.",
+        "evidence": [
+            "src/Support/Admin/ExtensionCookbookCoverageCatalogue.php",
+            "src/Providers/ExtensionCookbookServiceProvider.php"
+        ]
+    },
+    {
+        "claim": "A site owner gets nothing from it and can leave it out.",
+        "evidence": ["capell.json"]
+    },
+    {
+        "claim": "Under Developer in the admin, Capell Extension Cookbook adds a coverage list.",
+        "evidence": [
+            "src/Filament/Pages/ExtensionCookbookPage.php",
+            "src/Filament/Resources/ReferenceEntries/ReferenceEntryResource.php"
+        ]
+    },
+    {
+        "claim": "It marks the main ways a developer plugs into Capell as Demonstrated, or as Deliberately inactive where the sample leaves one switched off.",
+        "evidence": [
+            "src/Support/Admin/ExtensionCookbookCoverageCatalogue.php",
+            "resources/lang/en/admin.php"
+        ]
+    },
+    {
+        "claim": "Next to it sits a made-up list of Reference entries, and setting the package up for a site adds one example entry there.",
+        "evidence": [
+            "src/Filament/Resources/ReferenceEntries/ReferenceEntryResource.php",
+            "src/Actions/EnsureExtensionCookbookExampleAction.php",
+            "src/Actions/SetupExtensionCookbookPackageAction.php",
+            "src/Actions/AfterInstallExtensionCookbookPackageAction.php"
+        ]
+    },
+    {
+        "claim": "Installing it also adds a public page at /extension-cookbook, where any visitor sees the titles of the enabled entries.",
+        "evidence": [
+            "routes/web.php",
+            "src/Http/Controllers/ExtensionCookbookController.php",
+            "src/Actions/ReadReferenceEntriesAction.php",
+            "resources/views/frontend/index.blade.php",
+            "src/Providers/FrontendServiceProvider.php"
+        ]
+    },
+    {
+        "claim": "Remove it before launch if you only needed it for learning.",
+        "evidence": ["routes/web.php", "capell.json"]
+    },
+    {
+        "claim": "It needs the admin, the website and Layout Builder installed first.",
+        "evidence": ["capell.json"]
+    },
+    {
+        "claim": "A sample widget shows a title and a summary as a card, and a small health check and a doctor command come with it.",
+        "evidence": [
+            "src/Widget/ExtensionCookbookWidget.php",
+            "resources/views/widget/extension-cookbook.blade.php",
+            "src/Health/ExtensionCookbookHealthCheck.php",
+            "src/Console/Commands/ExtensionCookbookDoctorCommand.php"
+        ]
+    }
+]

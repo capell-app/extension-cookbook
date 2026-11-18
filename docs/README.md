@@ -8,7 +8,7 @@ tested example of a public extension contract.
   inventory, safety boundaries, and deliberately inactive seams.
 - [Extension points](extension-points.md) — source-traced examples for Core,
   Admin, Frontend, lifecycle, data, health, and content-graph integrations.
-- [Screenshot contract](screenshots.json) — route-backed capture targets and
+- [Screenshots](screenshots.json) — route-backed capture targets and
   provenance metadata.
 - [Package README](../README.md) — installation and code-map instructions.
 

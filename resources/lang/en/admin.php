@@ -8,6 +8,11 @@ return [
         'entries' => 'Reference entries',
         'group' => 'System',
     ],
+    'section' => [
+        'label' => 'Extension Cookbook note',
+        'description' => 'A short reference note that shows how a package supplies a content section.',
+        'note' => 'Note',
+    ],
     'settings' => [
         'title' => 'Capell Extension Cookbook',
         'enabled' => 'Enable extension cookbook',

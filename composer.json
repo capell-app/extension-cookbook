@@ -1,13 +1,13 @@
 {
     "name": "capell-app/extension-cookbook",
-    "description": "A small, safe example extension demonstrating Capell's public package contracts.",
+    "description": "A small sample Capell extension for developers, with a coverage list, example records, a widget and a health check to read and copy.",
     "homepage": "https://docs.capell.app/packages/extension-cookbook",
     "type": "library",
     "license": "MIT",
     "require": {
         "php": "^8.4",
         "capell-app/admin": "^1.0.72",
-        "capell-app/core": "^1.0.75",
+        "capell-app/core": "^1.0.78",
         "capell-app/frontend": "^1.0.72",
         "capell-app/layout-builder": "^1.0",
         "filament/forms": "^5.7.6",
@@ -18,9 +18,13 @@
         "spatie/laravel-package-tools": "^1.14.1",
         "spatie/laravel-settings": "^3.0"
     },
+    "suggest": {
+        "capell-app/content-sections": "Registers the Extension Cookbook example section when Content Sections is installed."
+    },
     "autoload": {
         "psr-4": {
-            "Capell\\ExtensionCookbook\\": "src/"
+            "Capell\\ExtensionCookbook\\": "src/",
+            "Capell\\ExtensionCookbook\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {

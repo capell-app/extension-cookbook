@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Capell\ExtensionCookbook\Providers;
 
 use Capell\Admin\Facades\CapellAdmin;
+use Capell\Core\Support\Extensions\ExtensionContributionReceiptContext;
+use Capell\Core\Support\Extensions\ExtensionContributionReceiptRegistry;
 use Capell\Core\Support\Packages\RegistersInstalledRuntime;
 use Capell\ExtensionCookbook\Bridges\ExtensionCookbookAdminBridge;
 use Capell\ExtensionCookbook\Models\ReferenceEntry;
@@ -28,9 +30,15 @@ final class AdminServiceProvider extends ServiceProvider
 
         // Admin prepares registered bridges while constructing the Filament panel.
         if (class_exists(CapellAdmin::class) && class_exists(Page::class)) {
-            CapellAdmin::registerAdminBridge(
-                self::$packageName,
-                ExtensionCookbookAdminBridge::class,
+            // The admin plugin can register this provider from inside another package's
+            // receipt context, so the bridge is recorded under this package's admin
+            // bucket explicitly, as the manifest declares it.
+            $this->app->make(ExtensionContributionReceiptRegistry::class)->withContext(
+                ExtensionContributionReceiptContext::forPackage(self::$packageName, 'admin', self::class),
+                static fn () => CapellAdmin::registerAdminBridge(
+                    self::$packageName,
+                    ExtensionCookbookAdminBridge::class,
+                ),
             );
         }
     }

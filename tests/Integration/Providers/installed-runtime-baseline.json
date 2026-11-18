@@ -4,13 +4,13 @@
     "scenarios": {
         "default": {
             "source": {
-                "ref": "origin/main",
-                "commit": "e69620f03a47d0042431e7a2d030a6729a0b4072",
+                "ref": "HEAD",
+                "commit": "a05d4c47c3bf7a56193f9b1126872d3e94c5b2b0",
                 "providers": {
-                    "Providers/AdminServiceProvider.php": "8e9de051c07b2a22dd91b55b35bce233497e76219b7a72ad5bd624cd45a9cf18",
-                    "Providers/ExtensionCookbookServiceProvider.php": "1005b8b4c313d7924fd0ef35e178913bd6be97e6250ab7325817c775cde414c9",
-                    "Providers/FrontendServiceProvider.php": "e3c30d26662ae6e735f8716db3570b528385437b23ecc44149613fa528ae5475",
-                    "Providers/MigrationMetadataServiceProvider.php": "5a65fc0280a128e8cbc122243542123c5f91df33d04650539fe5a229644fd835"
+                    "Providers/AdminServiceProvider.php": "2f0860a0903b579686b6e2292b7a8f85e07f17ef6079460a736681b04d248f64",
+                    "Providers/ExtensionCookbookServiceProvider.php": "03887442311bd85790b3ead7b8df870c97dd8b4f1f7b78fdefef8a6f5123dbe6",
+                    "Providers/FrontendServiceProvider.php": "83378c8aa0e0648eeb2c0c9e271dba57658c472466f4b70ac69e205c44961f0d",
+                    "Providers/MigrationMetadataServiceProvider.php": "f8e747932693afe4c03d0942937ce3ad583cffa2e09e1cbb4c32b306359293da"
                 },
                 "configure": null
             },
@@ -152,7 +152,9 @@
                 },
                 "morphs": {
                     "Capell\\ExtensionCookbook\\Models\\ReferenceEntry": "Capell\\ExtensionCookbook\\Models\\ReferenceEntry",
-                    "reference_entry": "Capell\\ExtensionCookbook\\Models\\ReferenceEntry"
+                    "Capell\\ExtensionCookbook\\Models\\ReferenceGuide": "Capell\\ExtensionCookbook\\Models\\ReferenceGuide",
+                    "reference_entry": "Capell\\ExtensionCookbook\\Models\\ReferenceEntry",
+                    "reference_guide": "Capell\\ExtensionCookbook\\Models\\ReferenceGuide"
                 },
                 "policies": {
                     "Capell\\ExtensionCookbook\\Models\\ReferenceEntry": "Capell\\ExtensionCookbook\\Policies\\ReferenceEntryPolicy"
@@ -323,6 +325,14 @@
                         "extension-cookbook.widget",
                         "capell-extension-cookbook::widget.extension-cookbook",
                         "Capell\\ExtensionCookbook\\Support\\Frontend\\ExtensionCookbookFrontendComponentContributor",
+                        "frontend",
+                        "source"
+                    ],
+                    [
+                        "page-variation",
+                        "reference-guide",
+                        "Capell\\ExtensionCookbook\\Models\\ReferenceGuide",
+                        "Capell\\ExtensionCookbook\\Providers\\FrontendServiceProvider",
                         "frontend",
                         "source"
                     ],
@@ -516,6 +526,13 @@
                             "Capell\\ExtensionCookbook\\Models\\ReferenceEntry"
                         ]
                     ],
+                    "page-variation": [
+                        [
+                            "page-variation",
+                            "reference-guide",
+                            "Capell\\ExtensionCookbook\\Models\\ReferenceGuide"
+                        ]
+                    ],
                     "render-hook": [
                         [
                             "render-hook",
@@ -672,6 +689,17 @@
                         "models": {
                             "ReferenceEntry": "Capell\\ExtensionCookbook\\Models\\ReferenceEntry"
                         },
+                        "pageVariations": {
+                            "reference-guide": [
+                                "Capell\\Core\\Data\\PageVariationData",
+                                {
+                                    "model": "Capell\\ExtensionCookbook\\Models\\ReferenceGuide",
+                                    "name": "reference-guide",
+                                    "resourceName": null,
+                                    "titleAttribute": null
+                                }
+                            ]
+                        },
                         "types": {
                             "extension-cookbook.entry": [
                                 "Capell\\Core\\Data\\PageTypeData",
@@ -758,7 +786,8 @@
                                 {
                                     "root": "<package>/src/Providers/../../database/migrations",
                                     "tables": {
-                                        "2026_08_29_000001_create_extension_cookbook_entries": "extension_cookbook_entries"
+                                        "2026_08_29_000001_create_extension_cookbook_entries": "extension_cookbook_entries",
+                                        "2026_11_14_000001_create_extension_cookbook_guides": "extension_cookbook_guides"
                                     }
                                 }
                             ]
@@ -1492,7 +1521,8 @@
                                 {
                                     "root": "<package>/src/Providers/../../database/migrations",
                                     "tables": {
-                                        "2026_08_29_000001_create_extension_cookbook_entries": "extension_cookbook_entries"
+                                        "2026_08_29_000001_create_extension_cookbook_entries": "extension_cookbook_entries",
+                                        "2026_11_14_000001_create_extension_cookbook_guides": "extension_cookbook_guides"
                                     }
                                 }
                             ]
@@ -1689,6 +1719,14 @@
                     "extension-cookbook.widget",
                     "capell-extension-cookbook::widget.extension-cookbook",
                     "Capell\\ExtensionCookbook\\Support\\Frontend\\ExtensionCookbookFrontendComponentContributor",
+                    "frontend",
+                    "source"
+                ],
+                [
+                    "page-variation",
+                    "reference-guide",
+                    "Capell\\ExtensionCookbook\\Models\\ReferenceGuide",
+                    "Capell\\ExtensionCookbook\\Providers\\FrontendServiceProvider",
                     "frontend",
                     "source"
                 ],

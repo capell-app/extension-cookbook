@@ -7,5 +7,13 @@
             "1eacd8d88e9150bb16fd9ce0ac4c72a177a46e647bcc7c432d35e7106606a644",
             "630270afa8320da6ac8c72487d9f757c002effb911f56b403e02be5e8ed8c06a"
         ]
+    },
+    "create_extension_cookbook_guides": {
+        "names": [
+            "2026_11_14_000001_create_extension_cookbook_guides"
+        ],
+        "sha256": [
+            "1a07a57e00665fe830b02309444e501515098fdaf6806bd36942e07e02036d11"
+        ]
     }
 }
