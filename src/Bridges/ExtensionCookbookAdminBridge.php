@@ -7,6 +7,7 @@ namespace Capell\ExtensionCookbook\Bridges;
 use Capell\Admin\Contracts\Bridges\AdminBridge;
 use Capell\Admin\Data\Bridges\AdminBridgeContextData;
 use Capell\Admin\Enums\DashboardEnum;
+use Capell\Admin\Enums\NavigationGroupEnum;
 use Capell\Admin\Enums\SchemaExtenderEnum;
 use Capell\Admin\Support\Bridges\AdminBridgeRegistrar;
 use Capell\ExtensionCookbook\Filament\Configurators\ExtensionCookbookConfigurator;
@@ -29,7 +30,7 @@ final class ExtensionCookbookAdminBridge implements AdminBridge
         $registrar->page(ExtensionCookbookPage::class);
         $registrar->resource(
             ReferenceEntryResource::class,
-            (string) __('capell-extension-cookbook::admin.navigation.group'),
+            NavigationGroupEnum::Developer->getLabel(),
         );
         $registrar->extensionDashboardFilamentWidget(ExtensionCookbookDashboardWidget::class);
         $registrar->filamentDashboardWidget(ExtensionCookbookOverviewStat::class, DashboardEnum::Main);

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use Capell\Core\Data\Rendering\RenderHookContext;
 use Capell\ExtensionCookbook\Support\Frontend\ExtensionCookbookFrontendComponentContributor;
 use Capell\ExtensionCookbook\Support\Frontend\ExtensionCookbookRenderHook;
 use Capell\Frontend\Contracts\FrontendContextReader;
-use Capell\Frontend\Data\RenderHookContext;
 use Capell\Frontend\Enums\FrontendComponentTarget;
 use Capell\Frontend\Enums\RenderHookLocation;
 use Illuminate\Database\Events\QueryExecuted;

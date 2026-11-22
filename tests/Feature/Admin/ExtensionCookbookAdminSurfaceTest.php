@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Capell\Admin\Contracts\Extensions\ExtensionRemovalCoordinator;
 use Capell\Admin\Contracts\Themes\PendingThemeInstallProvider;
+use Capell\Admin\Data\AdminSurfaceContributionData;
 use Capell\Admin\Data\Bridges\AdminBridgeContextData;
 use Capell\Admin\Enums\DashboardEnum;
 use Capell\Admin\Enums\NavigationGroupEnum;
@@ -76,11 +77,29 @@ it('registers the resource, page, widgets, configurator and schema extender thro
         ->toContain(ExtensionCookbookOverviewStat::class);
 });
 
+it('registers the reference entries under the Developer group the screens sit in, not System', function (): void {
+    CapellAdmin::clearAdminSurfaceContributions();
+
+    (new ExtensionCookbookAdminBridge)->register(
+        resolve(AdminBridgeRegistrar::class),
+        AdminBridgeContextData::forPackage('capell-app/extension-cookbook'),
+    );
+
+    $groups = collect(CapellAdmin::getAdminSurfaceContributions())
+        ->flatten(1)
+        ->filter(fn (mixed $contribution): bool => $contribution instanceof AdminSurfaceContributionData && $contribution->class === ReferenceEntryResource::class)
+        ->map(fn (AdminSurfaceContributionData $contribution): ?string => $contribution->group)
+        ->values()
+        ->all();
+
+    expect($groups)->toBe([NavigationGroupEnum::Developer->getLabel()]);
+});
+
 it('keeps the catalogue typed and complete across the three admin groups', function (): void {
     $catalogue = ExtensionCookbookCoverageCatalogue::entries();
     $expectedTypes = collect(ExtensionContributionType::cases())
         // Public render data remains an experimental Core seam and is not part
-        // of this package's released 27-type contract.
+        // of this package's released 28-type contract.
         ->reject(static fn (ExtensionContributionType $type): bool => $type === ExtensionContributionType::PublicRenderData)
         ->map(static fn (ExtensionContributionType $type): string => $type->value)
         ->sort()
@@ -94,16 +113,18 @@ it('keeps the catalogue typed and complete across the three admin groups', funct
         ->all();
 
     expect($catalogue)->toHaveKeys(['Core', 'Admin', 'Frontend'])
-        ->and(collect($catalogue)->flatten(1))->toHaveCount(27)
+        ->and(collect($catalogue)->flatten(1))->toHaveCount(28)
         ->and($catalogueTypes)->toBe($expectedTypes)
         ->and(collect($catalogue['Admin'])->pluck('type'))->toContain('admin-resource', 'admin-page', 'configurator', 'permission')
         ->and(collect($catalogue)->flatten(1)->keyBy('type')->only([
             'agent-capability',
+            'builder-block',
         ])->pluck('status')->unique()->sort()->values()->all())->toBe([
             'Deliberately inactive',
         ])
         ->and(collect($catalogue)->flatten(1)->keyBy('type')->except([
             'agent-capability',
+            'builder-block',
         ])->pluck('status')->unique()->all())->toBe([
             'Demonstrated',
         ])

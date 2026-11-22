@@ -6,7 +6,6 @@ return [
     'navigation' => [
         'extension_cookbook' => 'Capell Extension Cookbook',
         'entries' => 'Reference entries',
-        'group' => 'System',
     ],
     'section' => [
         'label' => 'Extension Cookbook note',
@@ -87,6 +86,7 @@ return [
             'section' => 'Provide a package-owned content section.',
             'page-type' => 'Register a package-owned page type.',
             'dashboard-widget' => 'Add a package-owned widget to an admin dashboard.',
+            'builder-block' => 'Add a package-owned block to the page builder.',
             'overview-stat' => 'Add a package-owned summary statistic to an admin dashboard.',
             'schema-extender' => 'Extend a supported admin schema seam.',
             'configurator' => 'Add a package-owned configurator to a supported admin surface.',

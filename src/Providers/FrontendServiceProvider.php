@@ -6,6 +6,7 @@ namespace Capell\ExtensionCookbook\Providers;
 
 use Capell\Core\Contracts\Extensions\RecordsExtensionContributionReceipt;
 use Capell\Core\Data\PageVariationData;
+use Capell\Core\Data\Rendering\Assets\FrontendResourceData;
 use Capell\Core\Enums\ExtensionContributionType;
 use Capell\Core\Enums\PresentationLoadingStrategy;
 use Capell\Core\Facades\CapellCore;
@@ -18,7 +19,6 @@ use Capell\ExtensionCookbook\Widget\ExtensionCookbookWidget;
 use Capell\ExtensionCookbook\Widget\ExtensionCookbookWidgetInputData;
 use Capell\ExtensionCookbook\Widget\ExtensionCookbookWidgetRenderData;
 use Capell\Frontend\Contracts\FrontendComponentContributor;
-use Capell\Frontend\Data\Assets\FrontendResourceData;
 use Capell\Frontend\Data\Assets\FrontendResourceGroupData;
 use Capell\Frontend\Data\Assets\PublicResourceSourceData;
 use Capell\Frontend\Enums\FrontendComponentTarget;

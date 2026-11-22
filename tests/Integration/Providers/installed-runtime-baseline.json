@@ -5,11 +5,11 @@
         "default": {
             "source": {
                 "ref": "HEAD",
-                "commit": "a05d4c47c3bf7a56193f9b1126872d3e94c5b2b0",
+                "commit": "ebcd458e0a9ad46f7c93be498066a4c04dc6e896",
                 "providers": {
                     "Providers/AdminServiceProvider.php": "2f0860a0903b579686b6e2292b7a8f85e07f17ef6079460a736681b04d248f64",
                     "Providers/ExtensionCookbookServiceProvider.php": "03887442311bd85790b3ead7b8df870c97dd8b4f1f7b78fdefef8a6f5123dbe6",
-                    "Providers/FrontendServiceProvider.php": "83378c8aa0e0648eeb2c0c9e271dba57658c472466f4b70ac69e205c44961f0d",
+                    "Providers/FrontendServiceProvider.php": "28f0dde07a76fb905250e5b090991e3a2eda87d2c8e69bac840c0a08a22ae049",
                     "Providers/MigrationMetadataServiceProvider.php": "f8e747932693afe4c03d0942937ce3ad583cffa2e09e1cbb4c32b306359293da"
                 },
                 "configure": null
@@ -33,8 +33,8 @@
                         "Capell\\Admin\\Data\\AdminSurfaceContributionData",
                         {
                             "class": "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
-                            "group": "System",
-                            "key": "resource:System:default",
+                            "group": "Developer",
+                            "key": "resource:Developer:default",
                             "name": "default",
                             "position": null,
                             "tag": null,
@@ -186,7 +186,7 @@
                     ],
                     [
                         "admin-resource",
-                        "resource:System:default",
+                        "resource:Developer:default",
                         "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
                         "Capell\\Admin\\Support\\CapellAdminManager",
                         "admin",
@@ -194,7 +194,7 @@
                     ],
                     [
                         "admin-resource",
-                        "resource:System:default",
+                        "resource:Developer:default",
                         "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
                         "Capell\\Admin\\Support\\Bridges\\AdminBridgeRegistrar",
                         "admin",
@@ -415,12 +415,12 @@
                     "admin-resource": [
                         [
                             "admin-resource",
-                            "resource:System:default",
+                            "resource:Developer:default",
                             "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource"
                         ],
                         [
                             "admin-resource",
-                            "resource:System:default",
+                            "resource:Developer:default",
                             "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource"
                         ]
                     ],
@@ -609,12 +609,12 @@
                                 ]
                             },
                             "resource": {
-                                "resource:System:default": [
+                                "resource:Developer:default": [
                                     "Capell\\Admin\\Data\\AdminSurfaceContributionData",
                                     {
                                         "class": "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
-                                        "group": "System",
-                                        "key": "resource:System:default",
+                                        "group": "Developer",
+                                        "key": "resource:Developer:default",
                                         "name": "default",
                                         "position": null,
                                         "tag": null,
@@ -859,7 +859,7 @@
                                     "package": "capell-app/extension-cookbook",
                                     "resources": [
                                         [
-                                            "Capell\\Frontend\\Data\\Assets\\FrontendResourceData",
+                                            "Capell\\Core\\Data\\Rendering\\Assets\\FrontendResourceData",
                                             {
                                                 "async": false,
                                                 "criticalCssEligible": false,
@@ -880,7 +880,7 @@
                                             }
                                         ],
                                         [
-                                            "Capell\\Frontend\\Data\\Assets\\FrontendResourceData",
+                                            "Capell\\Core\\Data\\Rendering\\Assets\\FrontendResourceData",
                                             {
                                                 "async": false,
                                                 "criticalCssEligible": false,
@@ -906,7 +906,7 @@
                         },
                         "resources": {
                             "capell-app/extension-cookbook:script": [
-                                "Capell\\Frontend\\Data\\Assets\\FrontendResourceData",
+                                "Capell\\Core\\Data\\Rendering\\Assets\\FrontendResourceData",
                                 {
                                     "async": false,
                                     "criticalCssEligible": false,
@@ -927,7 +927,7 @@
                                 }
                             ],
                             "capell-app/extension-cookbook:styles": [
-                                "Capell\\Frontend\\Data\\Assets\\FrontendResourceData",
+                                "Capell\\Core\\Data\\Rendering\\Assets\\FrontendResourceData",
                                 {
                                     "async": false,
                                     "criticalCssEligible": false,
@@ -1132,8 +1132,8 @@
                         "Capell\\Admin\\Data\\AdminSurfaceContributionData",
                         {
                             "class": "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
-                            "group": "System",
-                            "key": "resource:System:default",
+                            "group": "Developer",
+                            "key": "resource:Developer:default",
                             "name": "default",
                             "position": null,
                             "tag": null,
@@ -1225,7 +1225,7 @@
                     ],
                     [
                         "admin-resource",
-                        "resource:System:default",
+                        "resource:Developer:default",
                         "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
                         "Capell\\Admin\\Support\\CapellAdminManager",
                         "admin",
@@ -1233,7 +1233,7 @@
                     ],
                     [
                         "admin-resource",
-                        "resource:System:default",
+                        "resource:Developer:default",
                         "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
                         "Capell\\Admin\\Support\\Bridges\\AdminBridgeRegistrar",
                         "admin",
@@ -1366,12 +1366,12 @@
                     "admin-resource": [
                         [
                             "admin-resource",
-                            "resource:System:default",
+                            "resource:Developer:default",
                             "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource"
                         ],
                         [
                             "admin-resource",
-                            "resource:System:default",
+                            "resource:Developer:default",
                             "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource"
                         ]
                     ],
@@ -1454,12 +1454,12 @@
                                 ]
                             },
                             "resource": {
-                                "resource:System:default": [
+                                "resource:Developer:default": [
                                     "Capell\\Admin\\Data\\AdminSurfaceContributionData",
                                     {
                                         "class": "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
-                                        "group": "System",
-                                        "key": "resource:System:default",
+                                        "group": "Developer",
+                                        "key": "resource:Developer:default",
                                         "name": "default",
                                         "position": null,
                                         "tag": null,
@@ -1580,7 +1580,7 @@
                 ],
                 [
                     "admin-resource",
-                    "resource:System:default",
+                    "resource:Developer:default",
                     "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
                     "Capell\\Admin\\Support\\CapellAdminManager",
                     "admin",
@@ -1588,7 +1588,7 @@
                 ],
                 [
                     "admin-resource",
-                    "resource:System:default",
+                    "resource:Developer:default",
                     "Capell\\ExtensionCookbook\\Filament\\Resources\\ReferenceEntries\\ReferenceEntryResource",
                     "Capell\\Admin\\Support\\Bridges\\AdminBridgeRegistrar",
                     "admin",

@@ -52,7 +52,7 @@
             "type": "admin-resource",
             "class": "Capell\\ExtensionCookbook\\Manifest\\Admin\\ReferenceEntryResourceContribution",
             "keys": [
-                "resource:System:default",
+                "resource:Developer:default",
                 "resource:ReferenceEntry:default"
             ]
         },

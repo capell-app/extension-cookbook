@@ -6,9 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "capell-app/admin": "^1.0.72",
-        "capell-app/core": "^1.0.78",
-        "capell-app/frontend": "^1.0.72",
+        "capell-app/admin": "^1.0.78",
+        "capell-app/core": "^1.0.79",
+        "capell-app/frontend": "^1.0.79",
         "capell-app/layout-builder": "^1.0",
         "filament/forms": "^5.7.6",
         "filament/filament": "^5.7.6",

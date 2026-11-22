@@ -10,14 +10,14 @@ Installing it also adds a public page at /extension-cookbook, where any visitor 
 
 A sample widget shows a title and a summary as a card, and a small health check and a doctor command come with it.
 
-- **Price and availability:** Check current availability and price on the [Capell Marketplace listing](https://capell.app/extensions/extension-cookbook).
+- **Price and availability:** Check current availability and price on the [Capell Marketplace listing](https://capell.app/marketplace/extensions/extension-cookbook).
 - **Licence:** Published under MIT in `composer.json`.
-- **Requires:** `PHP ^8.4`, `capell-app/admin ^1.0.72`, `capell-app/core ^1.0.78`, `capell-app/frontend ^1.0.72`, `capell-app/layout-builder ^1.0`, `filament/forms ^5.7.6`, `filament/filament ^5.7.6`, `laravel/framework ^12.61.1|^13.12.0`, `lorisleiva/laravel-actions ^2.8`, `spatie/laravel-data ^4.5`, `spatie/laravel-package-tools ^1.14.1`, `spatie/laravel-settings ^3.0`.
-- **Install:** `composer require capell-app/extension-cookbook`.
+- **Requires:** `PHP ^8.4`, `capell-app/admin ^1.0.78`, `capell-app/core ^1.0.79`, `capell-app/frontend ^1.0.79`, `capell-app/layout-builder ^1.0`, `filament/forms ^5.7.6`, `filament/filament ^5.7.6`, `laravel/framework ^12.61.1|^13.12.0`, `lorisleiva/laravel-actions ^2.8`, `spatie/laravel-data ^4.5`, `spatie/laravel-package-tools ^1.14.1`, `spatie/laravel-settings ^3.0`.
+- **Install:** `composer require capell-app/extension-cookbook:@beta`.
 
 ## Quick Start
 
-1. Install the package: `composer require capell-app/extension-cookbook`.
+1. Install the package: `composer require capell-app/extension-cookbook:@beta`.
 2. For developers building a Capell extension: Permission to view the Extension Cookbook (the `View:ExtensionCookbook` permission) in a development environment.
 3. Open `/admin/extension-cookbook`. Under **System**, open **Capell Extension Cookbook** and read the Extension coverage groups, then the Registrar method coverage section. Each card names a contract and whether the cookbook demonstrates it.
 4. Check the result: The page lists every demonstrated contract with its status, so you can pick the first recipe to copy. Next: Open the contribution map in the package docs, find the registrar for that contract in **Which registrar?**, and copy its focused test.
@@ -34,7 +34,7 @@ The [contribution map](docs/contribution-map.md) traces each demonstrated seam t
 
 ## Limits And Pitfalls
 
-- Install the required Capell packages at the versions in `composer.json`: `capell-app/admin ^1.0.72`, `capell-app/core ^1.0.78`, `capell-app/frontend ^1.0.72`, `capell-app/layout-builder ^1.0`.
+- Install the required Capell packages at the versions in `composer.json`: `capell-app/admin ^1.0.78`, `capell-app/core ^1.0.79`, `capell-app/frontend ^1.0.79`, `capell-app/layout-builder ^1.0`.
 - Run migrations before opening package resources or public routes.
 - Review middleware, throttling, signatures, and public-output safety in `routes/web.php` before exposing routes.
 - Keep the host Laravel scheduler running so package-registered schedules can execute: `Capell\ExtensionCookbook\Manifest\Frontend\ExtensionCookbookScheduledJobContribution (manifest declared)`.

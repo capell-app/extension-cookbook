@@ -29,7 +29,7 @@ use Capell\ExtensionCookbook\Widget\ExtensionCookbookWidget;
 use Capell\ExtensionCookbook\Widget\ExtensionCookbookWidgetInputData;
 use Capell\ExtensionCookbook\Widget\ExtensionCookbookWidgetRenderData;
 use Capell\Frontend\Contracts\FrontendComponentContributor;
-use Capell\Frontend\Data\Assets\FrontendResourceData;
+use Capell\Core\Data\Rendering\Assets\FrontendResourceData;
 use Capell\Frontend\Data\Assets\FrontendResourceGroupData;
 use Capell\Frontend\Data\Assets\PublicResourceSourceData;
 use Capell\Frontend\Enums\RenderHookLocation;
@@ -255,8 +255,8 @@ declare(strict_types=1);
 
 namespace Capell\ExtensionCookbook\Support\Frontend;
 
-use Capell\Frontend\Contracts\RenderHookExtensionInterface;
-use Capell\Frontend\Data\RenderHookContext;
+use Capell\Core\Contracts\Rendering\RenderHookExtensionInterface;
+use Capell\Core\Data\Rendering\RenderHookContext;
 
 final class ExtensionCookbookRenderHook implements RenderHookExtensionInterface
 {
