@@ -6,6 +6,7 @@
     "kind": "package",
     "capellApiVersion": "^1.0",
     "version": "1.0.0",
+    "launchStatus": "preview",
     "description": "A small working sample extension for developers that shows which Capell extension points it covers, with a widget and health check.",
     "product": {
         "group": "Capell Essentials",
